@@ -5,7 +5,6 @@ public class ItemCarrito {
 	private int cantidad;
 	
 	public ItemCarrito(Articulo articulo, int cantidad) {
-		super();
 		this.articulo = articulo;
 		this.cantidad = cantidad;
 	}
@@ -13,7 +12,6 @@ public class ItemCarrito {
 	public Articulo getArticulo() {
 		return articulo;
 	}
-
 	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
 	}
@@ -21,7 +19,6 @@ public class ItemCarrito {
 	public int getCantidad() {
 		return cantidad;
 	}
-
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
