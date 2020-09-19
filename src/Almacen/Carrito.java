@@ -1,8 +1,12 @@
 package Almacen;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+
 
 public class Carrito {
 	private int id;
@@ -11,18 +15,20 @@ public class Carrito {
 	private boolean cerrado;
 	private double descuento;
 	private Cliente cliente;
-	private List<ItemCarrito> lstItemCarrito;
+	private List<ItemCarrito> lstItemCarrito= new ArrayList<ItemCarrito>();
 	private Entrega entrega;
 	
+	
+
 	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente,
-	List<ItemCarrito> lstItemCarrito, Entrega entrega) {
+			Entrega entrega) {
+		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.cerrado = cerrado;
 		this.descuento = descuento;
 		this.cliente = cliente;
-		this.lstItemCarrito = lstItemCarrito;
 		this.entrega = entrega;
 	}
 
@@ -95,12 +101,16 @@ public class Carrito {
 		return lstItemCarrito.add(itemCarrito1);
 	}
 
-	public double calcularSubTotalItem() {
-		double subTotal=0.0;
+	public double calcularTotalCarrito() {
+		double total=0.0;
 		for(ItemCarrito i: lstItemCarrito) {
-			subTotal += (i.getCantidad())*((i.getArticulo()).getPrecio());
+			total += i.calcularSubTotalItem();
 		}
-		return subTotal;
+		return total;
+	}
+	
+	public double calcularDescuentoEfectivo(double porcentajeDescuentoEfectivo) {
+		return ((this.calcularTotalCarrito()*porcentajeDescuentoEfectivo)/100);
 	}
 	
 	public double totalCarrito() {
