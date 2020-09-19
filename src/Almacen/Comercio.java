@@ -1,6 +1,8 @@
 package Almacen;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class Comercio extends Actor{
 	private String nombreComercio;
@@ -12,6 +14,7 @@ public class Comercio extends Actor{
 	private int porcentajeDescuentoEfectivo;
 	private List<DiaRetiro> lstDiaRetiro;
 	private List<Carrito> lstCarrito;
+	private List<Articulo> lstArticulo = new ArrayList<Articulo>();
 	
 	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento,
 	int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo, List<DiaRetiro> lstDiaRetiro, List<Carrito> lstCarrito) {
@@ -89,5 +92,19 @@ public class Comercio extends Actor{
 	public void setLstCarrito(List<Carrito> lstCarrito) {
 		this.lstCarrito = lstCarrito;
 	}
-		
+	
+	public List<Articulo> getLstArticulo() {
+		return lstArticulo;
+	}
+	public void setLstArticulo(List<Articulo> lstArticulo) {
+		this.lstArticulo = lstArticulo;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Comercio [nombreComercio=" + nombreComercio + ", cuil=" + cuit + ", costoFijo=" + costoFijo
+				+ ", costoPorKm=" + costoPorKm + ", diaDescuento=" + diaDescuento + ", porcentajeDescuentoDia="
+				+ porcentajeDescuentoDia + ", porcentajeDescuentoEfectivo=" + porcentajeDescuentoEfectivo + "]";
+	}
 }

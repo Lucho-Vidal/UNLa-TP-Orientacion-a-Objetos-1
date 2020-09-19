@@ -1,4 +1,4 @@
-package almacen;
+package Almacen;
 import java.time.*;
 
 public class RetiroLocal extends Entrega {
@@ -12,7 +12,6 @@ public class RetiroLocal extends Entrega {
 	public LocalTime getHoraEntrega() {
 		return horaEntrega;
 	}
-
 	public void setHoraEntrega(LocalTime horaEntrega) {
 		this.horaEntrega = horaEntrega;
 	}
@@ -21,6 +20,4 @@ public class RetiroLocal extends Entrega {
 	public String toString() {
 		return "RetiroLocal [horaEntrega=" + horaEntrega + "]";
 	}
-	
-	
 }

@@ -37,7 +37,7 @@ public abstract class Actor {
 	}
 	public boolean validarCuit(long cuit) {
 		if(String.valueOf(cuit).length() != 11) {	//se parsea dni a String y se obtiene su largo
-			return false;	//los cuit solo tienen 11 dígitos
+			return false;		//los cuit solo tienen 11 dígitos
 		}
 		
 		char[] cuitArray = (String.valueOf(cuit)).toCharArray(); 	//se obtiene un array de chars con los dígitos del cuit

@@ -1,4 +1,4 @@
-package almacen;
+package Almacen;
 import java.time.*;
 
 public class Envio extends Entrega {
@@ -7,8 +7,7 @@ public class Envio extends Entrega {
 	private double costo;
 	private Ubicacion ubicacion;
 	
-	public Envio(int id, LocalDate fecha, boolean efectivo, LocalDate horaHasta, LocalDate horaDesde, double costo,
-			Ubicacion ubicacion) {
+	public Envio(int id, LocalDate fecha, boolean efectivo, LocalDate horaHasta, LocalDate horaDesde, double costo, Ubicacion ubicacion) {
 		super(id, fecha, efectivo);
 		this.horaHasta = horaHasta;
 		this.horaDesde = horaDesde;
@@ -19,7 +18,6 @@ public class Envio extends Entrega {
 	public LocalDate getHoraHasta() {
 		return horaHasta;
 	}
-
 	public void setHoraHasta(LocalDate horaHasta) {
 		this.horaHasta = horaHasta;
 	}
@@ -27,7 +25,6 @@ public class Envio extends Entrega {
 	public LocalDate getHoraDesde() {
 		return horaDesde;
 	}
-
 	public void setHoraDesde(LocalDate horaDesde) {
 		this.horaDesde = horaDesde;
 	}
@@ -35,7 +32,6 @@ public class Envio extends Entrega {
 	public double getCosto() {
 		return costo;
 	}
-
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
@@ -43,7 +39,6 @@ public class Envio extends Entrega {
 	public Ubicacion getUbicacion() {
 		return ubicacion;
 	}
-
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
@@ -53,7 +48,6 @@ public class Envio extends Entrega {
 		return "Envio [horaHasta=" + horaHasta + ", horaDesde=" + horaDesde + ", costo=" + costo + ", ubicacion="
 				+ ubicacion + "]";
 	}
-	
 	
 	
 	

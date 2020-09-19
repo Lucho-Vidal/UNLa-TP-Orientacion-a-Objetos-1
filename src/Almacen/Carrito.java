@@ -15,8 +15,7 @@ public class Carrito {
 	private Entrega entrega;
 	
 	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente,
-			List<ItemCarrito> lstItemCarrito, Entrega entrega) {
-		super();
+	List<ItemCarrito> lstItemCarrito, Entrega entrega) {
 		this.id = id;
 		this.fecha = fecha;
 		this.hora = hora;
@@ -91,5 +90,21 @@ public class Carrito {
 		this.entrega = entrega;
 	}
 	
+	public boolean agregar(Articulo articulo, int cantidad) {
+		ItemCarrito itemCarrito1=new ItemCarrito(articulo, cantidad);
+		return lstItemCarrito.add(itemCarrito1);
+	}
+
+	public double calcularSubTotalItem() {
+		double subTotal=0.0;
+		for(ItemCarrito i: lstItemCarrito) {
+			subTotal += (i.getCantidad())*((i.getArticulo()).getPrecio());
+		}
+		return subTotal;
+	}
 	
+	public double totalCarrito() {
+		 double total=0.0;
+		 return total;
+	}
 }

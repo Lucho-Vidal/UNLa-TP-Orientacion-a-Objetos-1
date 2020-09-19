@@ -1,4 +1,4 @@
-package almacen;
+package Almacen;
 
 public class Articulo {
 	private int id;
