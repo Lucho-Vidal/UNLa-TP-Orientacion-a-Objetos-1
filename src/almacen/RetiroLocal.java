@@ -1,4 +1,4 @@
-package Almacen;
+package almacen;
 import java.time.*;
 
 public class RetiroLocal extends Entrega {

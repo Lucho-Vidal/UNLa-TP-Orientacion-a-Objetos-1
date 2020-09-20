@@ -1,4 +1,4 @@
-package Almacen;
+package almacen;
 
 public class Articulo {
 	private int id;
@@ -40,7 +40,7 @@ public class Articulo {
 			this.codBarras=codBarras;
 		}
 		else {
-			throws new Exception("Codigo de barras no valido");
+			throw new Exception("Codigo de barras no valido");
 		}
 	}
 

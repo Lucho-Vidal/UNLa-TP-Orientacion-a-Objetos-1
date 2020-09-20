@@ -1,4 +1,4 @@
-package Almacen;
+package almacen;
 
 public class Ubicacion {
 	private double latitud;

@@ -1,4 +1,4 @@
-package Almacen;
+package almacen;
 
 public abstract class Actor {
 	protected int id;

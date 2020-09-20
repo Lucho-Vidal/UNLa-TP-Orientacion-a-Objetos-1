@@ -1,4 +1,4 @@
-package Almacen;
+package almacen;
 
 public class Cliente extends Actor{
 	private String apellido;

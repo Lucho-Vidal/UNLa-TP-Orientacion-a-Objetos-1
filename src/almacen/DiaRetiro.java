@@ -1,7 +1,8 @@
-package Almacen;
+package almacen;
+
 import java.time.*;
 
-import Almacen.DiaRetiro;
+import almacen.DiaRetiro;
 
 public class DiaRetiro {
 	private int id;
@@ -9,7 +10,7 @@ public class DiaRetiro {
 	private LocalTime horaDesde;
 	private LocalTime horaHasta;
 	private int intervalo;
-	
+
 	public DiaRetiro(int id, int diaSemana, LocalTime horaDesde, LocalTime horaHasta, int intervalo) {
 		this.id = id;
 		this.diaSemana = diaSemana;
@@ -21,6 +22,7 @@ public class DiaRetiro {
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -28,6 +30,7 @@ public class DiaRetiro {
 	public int getDiaSemana() {
 		return diaSemana;
 	}
+
 	public void setDiaSemana(int diaSemana) {
 		this.diaSemana = diaSemana;
 	}
@@ -35,6 +38,7 @@ public class DiaRetiro {
 	public LocalTime getHoraDesde() {
 		return horaDesde;
 	}
+
 	public void setHoraDesde(LocalTime horaDesde) {
 		this.horaDesde = horaDesde;
 	}
@@ -42,6 +46,7 @@ public class DiaRetiro {
 	public LocalTime getHoraHasta() {
 		return horaHasta;
 	}
+
 	public void setHoraHasta(LocalTime horaHasta) {
 		this.horaHasta = horaHasta;
 	}
@@ -49,28 +54,21 @@ public class DiaRetiro {
 	public int getIntervalo() {
 		return intervalo;
 	}
+
 	public void setIntervalo(int intervalo) {
 		this.intervalo = intervalo;
 	}
-
+	
+	//TODO implementar equals
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DiaRetiro other = (DiaRetiro) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		return this.diaSemana == ((DiaRetiro)obj).getDiaSemana();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "DiaRetiro [id=" + id + ", diaSemana=" + diaSemana + ", horaDesde=" + horaDesde + ", horaHasta="
 				+ horaHasta + ", intervalo=" + intervalo + "]";
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package Almacen;
+package almacen;
 
 public class Contacto {
 	private String email;
