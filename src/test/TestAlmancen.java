@@ -6,9 +6,9 @@ import java.time.LocalTime;
 public class TestAlmancen {
 
 	public static void main(String[] args) {
-		LocalTime ahora=  LocalTime.of(15,20,00);
+		LocalTime ahora=  LocalTime.now();
 		System.out.println(ahora);
-		ahora=ahora.plusMinutes(30);
+		ahora=ahora.plusMinutes(60);
 		System.out.println(ahora);
 		
 		LocalDate hoy = LocalDate.now();

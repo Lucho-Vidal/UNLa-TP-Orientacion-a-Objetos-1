@@ -129,5 +129,6 @@ public class Carrito {
 	}
 	public double totalAPagarCarrito() {
 		 //TODO
+		return 0;
 	}
 }

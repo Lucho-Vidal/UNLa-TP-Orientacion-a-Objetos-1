@@ -59,7 +59,7 @@ public class DiaRetiro {
 		this.intervalo = intervalo;
 	}
 	
-	//TODO implementar equals
+	
 	@Override
 	public boolean equals(Object obj) {
 		return this.diaSemana == ((DiaRetiro)obj).getDiaSemana();

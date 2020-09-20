@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Comercio extends Actor {
 	private String nombreComercio;
 	private long cuit;
@@ -126,54 +125,108 @@ public class Comercio extends Actor {
 	}
 
 	// Metodos de casos de uso
-	// TODO desarrollo
 
-	public List<Turno> generarTurnosLibres(LocalDate fecha) {//retorna una lista de objetos Turno libres
-		
-		//List<Turno> turnosLibres = new ArrayList<Turno>();
-		//lstDiaRetiro. 
-		
-		
-		return null;
-	}
+	public List<Turno> generarTurnosLibres(LocalDate fecha) throws Exception{// retorna una lista de objetos Turno libres
 
-	public List<Turno> traerTurnosOcupados(LocalDate fecha) {//retorna una lista de objetos Turno dados
-		
-		
-		return null;
-	}
-
-	public List<Turno> generarAgenda(LocalDate fecha)throws Exception {//retorna una lista de objetos Turno indicando si está ocupado o libre.
-		
 		List<Turno> agenda = new ArrayList<Turno>();
 		
-		int indiceLista=-1; 
-		
+		int indiceLista = -1;
+
 		for (int i = 0; i < lstDiaRetiro.size(); i++) {
-			
-			if (fecha.getDayOfWeek().getValue()== lstDiaRetiro.get(i).getDiaSemana() ) {// si coincide con diaSemana 
+
+			if (fecha.getDayOfWeek().getValue() == lstDiaRetiro.get(i).getDiaSemana()) {// si coincide con diaSemana
 				indiceLista = i;
 			}
-		}	
-		if(indiceLista==-1)
-			throw new Exception("En la fecha ingresada no se realizan entregas: "+fecha);
+		}
+		if (indiceLista == -1)
+			throw new Exception("En la fecha ingresada no se realizan entregas: " + fecha);
+
+		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
+
+		while (hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
+			for (int i = 0; i < lstDiaRetiro.size(); i++) {// busquemos si el turno esta asignado a una entrega
+				Entrega entrega = lstCarrito.get(i).getEntrega();
+				if (entrega instanceof RetiroLocal) {// si la entrega es retiro local
+					if (hora != ((RetiroLocal) entrega).getHoraEntrega()) {// casteamos para obtener la fecha e igualarla con hora
+						Turno turno = new Turno(fecha, hora, false);// creo un turno disponible
+						agenda.add(turno);
+					}
+				}
+			}
+			hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// sumamos el intervalo
+		}
+
+		return agenda;
+	}
+
+	public List<Turno> traerTurnosOcupados(LocalDate fecha) throws Exception {// retorna una lista de objetos Turno dados
+		List<Turno> agenda = new ArrayList<Turno>();
 		
-		LocalTime hora=lstDiaRetiro.get(indiceLista).getHoraDesde();
-		
-		//busquemos si el turno esta asignado a una entrega
+		int indiceLista = -1;
+
 		for (int i = 0; i < lstDiaRetiro.size(); i++) {
-			Entrega entrega=lstCarrito.get(i).getEntrega();
-			if(entrega instanceof RetiroLocal) {
-				((RetiroLocal)entrega).getHoraEntrega();
+
+			if (fecha.getDayOfWeek().getValue() == lstDiaRetiro.get(i).getDiaSemana()) {// si coincide con diaSemana
+				indiceLista = i;
 			}
 		}
-		
-		while(hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {//mientras hora sea antes de horaHasta
-			hora=hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());//sumamos el intervalo
-			Turno turno=new Turno(fecha,hora,false);//creo un turno disponible
+		if (indiceLista == -1)
+			throw new Exception("En la fecha ingresada no se realizan entregas: " + fecha);
+
+		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
+
+		while (hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
+			for (int i = 0; i < lstDiaRetiro.size(); i++) {// busquemos si el turno esta asignado a una entrega
+				Entrega entrega = lstCarrito.get(i).getEntrega();
+				if (entrega instanceof RetiroLocal) {// si la entrega es retiro local
+					if (hora == ((RetiroLocal) entrega).getHoraEntrega()) {// casteamos para obtener la fecha e igualarla con hora
+						Turno turno = new Turno(fecha, hora, true);// creo un turno disponible
+						agenda.add(turno);
+					}
+				}
+			}
+			hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// sumamos el intervalo
+		}
+
+		return agenda;
+	}
+
+	public List<Turno> generarAgenda(LocalDate fecha) throws Exception {// retorna una lista de objetos Turno indicando
+																		// si está ocupado o libre.
+
+		List<Turno> agenda = new ArrayList<Turno>();
+
+		int indiceLista = -1;
+
+		for (int i = 0; i < lstDiaRetiro.size(); i++) {
+
+			if (fecha.getDayOfWeek().getValue() == lstDiaRetiro.get(i).getDiaSemana()) {// si coincide con diaSemana
+				indiceLista = i;
+			}
+		}
+		if (indiceLista == -1)
+			throw new Exception("En la fecha ingresada no se realizan entregas: " + fecha);
+
+		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
+
+		boolean ocupado;
+
+		while (hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
+			ocupado = false;
+			for (int i = 0; i < lstDiaRetiro.size(); i++) {// busquemos si el turno esta asignado a una entrega
+				Entrega entrega = lstCarrito.get(i).getEntrega();
+				if (entrega instanceof RetiroLocal) {// si la entrega es retiro local
+					if (hora == ((RetiroLocal) entrega).getHoraEntrega()) {// casteamos para obtener la fecha e
+																			// igualarla con hora
+						ocupado = true;
+					}
+				}
+			}
+			Turno turno = new Turno(fecha, hora, ocupado);// creo un turno disponible
+			hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// sumamos el intervalo
 			agenda.add(turno);
 		}
-		
+
 		return agenda;
 	}
 
