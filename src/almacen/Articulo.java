@@ -52,7 +52,7 @@ public class Articulo {
 		this.precio = precio;
 	}
 	
-	public static boolean validarCodBarras(String codBarras) {
+	public boolean validarCodBarras(String codBarras) {
 		return codBarras.matches("^[7]{1}[7]{1}[9]{1}[0-9]{10}$");	
 	}
 	
