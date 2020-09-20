@@ -68,7 +68,7 @@ public class Carrito {
 		return descuento;
 	}
 
-	public void setDescuento(double descuento) {
+	protected void setDescuento(double descuento) {
 		this.descuento = descuento;
 	}
 
@@ -113,8 +113,23 @@ public class Carrito {
 		return ((this.calcularTotalCarrito()*porcentajeDescuentoEfectivo)/100);
 	}
 	
-	public double totalCarrito() {
-		 double total=0.0;
-		 return total;
+	public double calcularDescuentoDia(int diaDescuento, double porcentajeDescuentoDia) {
+		return ((this.calcularTotalCarrito()*porcentajeDescuentoDia)/100);
+	}
+	
+	public void calcularDescuentoCarrito(int diaDescuento, double porcentajeDescuentoDia, double porcentajeDescuentoEfectivo) {
+		double efectivo= calcularDescuentoEfectivo(porcentajeDescuentoEfectivo);
+		double dia= calcularDescuentoDia(diaDescuento,porcentajeDescuentoDia);
+		double mayor=0.0;
+		if(efectivo>dia) {
+			mayor=efectivo;
+		}
+		else {
+			mayor=dia;
+		}
+		setDescuento(mayor);
+	}
+	public double totalAPagarCarrito() {
+		 //TODO
 	}
 }
