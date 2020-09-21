@@ -3,6 +3,9 @@ package test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import almacen.Envio;
+import almacen.Ubicacion;
+
 public class TestAlmancen {
 
 	public static void main(String[] args) {
@@ -16,6 +19,7 @@ public class TestAlmancen {
 		System.out.println(hoy.getDayOfWeek());
 		
 		System.out.println(hoy.getDayOfWeek().getValue()==6);
+		
 		
 	}
 
