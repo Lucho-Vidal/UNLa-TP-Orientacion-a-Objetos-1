@@ -21,6 +21,8 @@ public class TestAlmancen {
 		System.out.println(hoy.getDayOfWeek().getValue()==6);
 		
 		
+		
+		
 	}
 
 }
