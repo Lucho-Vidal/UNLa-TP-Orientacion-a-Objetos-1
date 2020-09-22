@@ -39,9 +39,8 @@ public class Cliente extends Actor{
 	public char getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
-		if(validarSexo(sexo)) {
-			this.sexo = sexo;
-		}
+	public void setSexo(char sexo) throws Exception{
+		if(!validarSexo(sexo)) throw new Exception("Error: Sexo invalido ('h' o 'm')");
+		this.sexo = sexo;
 	}
 }
