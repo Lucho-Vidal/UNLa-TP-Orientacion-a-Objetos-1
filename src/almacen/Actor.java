@@ -9,6 +9,7 @@ public abstract class Actor {
 		setContacto(contacto);
 	}
 
+	//Getters and setters
 	public int getId() {
 		return id;
 	}
@@ -23,47 +24,32 @@ public abstract class Actor {
 		this.contacto = contacto;
 	}
 	
+	//Casos de uso
 	public boolean validarIdentificadorUnico(long identificador){
-		if(this instanceof Cliente) {			//Si es cliente
-			return validarDni(identificador);	//tiene dni y se valida
-		}										//Sino
-		return validarCuit(identificador);		//tiene cuit y se valida
-	}
-	public boolean validarDni(long dni){
-		if(String.valueOf(dni).length() != 8 || String.valueOf(dni).length() != 9) {	//Se parsea dni a String y se obtiene su largo
-			return false;	//los dni solo tienen 8 o 9 dígitos
-		}
-		return true;
-	}
-	public boolean validarCuit(long cuit) {
-		if(String.valueOf(cuit).length() != 11) {	//se parsea dni a String y se obtiene su largo
-			return false;		//los cuit solo tienen 11 dígitos
+		String identificadorString = String.valueOf(identificador); 	//se parsea el identificador a String para heredar sus métodos
+		
+		if(this instanceof Cliente) {															//Si es cliente tiene dni
+			return(identificadorString.length() == 8 || identificadorString.length() == 9);		//Los dni solo tienen 8 o 9 dígitos
 		}
 		
-		char[] cuitArray = (String.valueOf(cuit)).toCharArray(); 	//se obtiene un array de chars con los dígitos del cuit
-	    int[] serie = {5, 4, 3, 2, 7, 6, 5, 4, 3, 2};				//numeros a multiplicar
-	    long z = cuit % 10;											//numero de validación
+		else if(identificadorString.length() != 11) {											//Si no es cliente es comercio y tiene cuit
+	    	return false;																		//los cuit solo tienen 11 dígitos
+		}
+		
+		char[] cuitArray = identificadorString.toCharArray(); 			//se obtiene un array de chars con los dígitos del cuit
+	    int[] serie = {5, 4, 3, 2, 7, 6, 5, 4, 3, 2};					//numeros a multiplicar
+	    long z = identificador % 10, sum = 0;							//numero de validación y acumulador
 	    
-	    int sum = 0;
 	    for (int i=0; i<10; i++){
-	        sum += Character.getNumericValue(cuitArray[i]) * serie[i];	//se multiplican ambos array dígito a dígito
+	        sum += Character.getNumericValue(cuitArray[i]) * serie[i];		//se multiplican ambos array dígito a dígito
 	    }
 	    
 	    sum = 11 - (sum % 11);	//se desencripta la suma
 	    if(sum==11) sum=0; 		//se corrige excepcion
-	    
-	    if(sum==z) { 			// se evalua que la suma y el numero de validacion coincidan
-	    	return true;
-	    }
-	    else {
-	    	return false;
-	    }
+	    return (sum==z);		// se evalua que la suma y el numero de validacion coincidan
 	}
 	
 	public boolean validarSexo(char sexo) {
-		if(sexo=='h' || sexo=='m') {
-			return true;
-		}
-		return false;
+		return(sexo=='h' || sexo=='m');
 	}
 }
