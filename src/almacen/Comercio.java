@@ -233,14 +233,11 @@ public class Comercio extends Actor {
 	public boolean agregarDiaRetiro(int diaSemana, LocalTime horaDesde, LocalTime horaHasta, int intervalo)
 			throws Exception {
 
-		int idDiaRetiro;
+		int idDiaRetiro=1;
 
 		// Busco el ultimo Id
-		if (getLstDiaRetiro().size() == 0)// si la lista esta vacia el Id va a ser = 1
-			idDiaRetiro = 1;
-		else {// sino busco el ultimo diaRetiro en la lista y le asigno el ultimo id
-			DiaRetiro ultimoDia = lstDiaRetiro.get(getLstDiaRetiro().size() - 1);
-			idDiaRetiro = ultimoDia.getId() + 1;// el ultimo Id mas 1
+		if (getLstDiaRetiro().size() != 0){// si la lista esta vacia el Id va a ser = 1
+			idDiaRetiro = lstDiaRetiro.get(getLstDiaRetiro().size() - 1).getId() + 1;// el ultimo Id mas 1
 		}
 
 		DiaRetiro nuevoDiaRetiro = new DiaRetiro(idDiaRetiro, diaSemana, horaDesde, horaHasta, intervalo);

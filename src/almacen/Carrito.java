@@ -2,7 +2,6 @@ package almacen;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -25,7 +24,7 @@ public class Carrito {
 		this.cerrado = cerrado;
 		this.descuento = descuento;
 		this.cliente = cliente;
-		this.entrega = entrega;
+		this.setEntrega(entrega); 
 	}
 
 	public int getId() {
