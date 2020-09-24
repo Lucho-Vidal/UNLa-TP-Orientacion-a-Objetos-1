@@ -93,7 +93,23 @@ public class Carrito {
 
 	
 	// Metodos
-	public boolean agregar(Articulo articulo, int cantidad) {
+	
+	// Trae un articulo de la lista itemCArrito
+	public ItemCarrito traerItemCarrito(Articulo articulo) {
+		ItemCarrito itemAuxiliar = null;
+		for(ItemCarrito i: this.lstItemCarrito) {
+			if(i.getArticulo()==articulo) {
+				itemAuxiliar = i;
+			}
+		}
+		return itemAuxiliar;
+	}
+	
+	// Si el articulo que intento agregar ya existe se lanza una excepcion, de lo
+	//contrario lo agrego a mi lista de itemCarrito
+	public boolean agregar(Articulo articulo, int cantidad) throws Exception{
+		if(traerItemCarrito(articulo)!=null) throw new Exception("El articulo ya existe"); 
+			
 		ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
 		return lstItemCarrito.add(itemCarrito1);
 	}
@@ -111,7 +127,19 @@ public class Carrito {
 	}
 	
 	public double calcularDescuentoDia(int diaDescuento, double porcentajeDescuentoDia) {
-		return ((this.calcularTotalCarrito()*porcentajeDescuentoDia)/100);
+		double descuento = 0.0;
+		if(diaDescuento==3) {
+			for(ItemCarrito i: this.lstItemCarrito) {
+				int cantidad= i.getCantidad();
+				if(cantidad>=2) {
+					int nuevaCantidad= cantidad/2;
+					descuento = (nuevaCantidad*i.getArticulo().getPrecio()*porcentajeDescuentoDia)/100;
+					
+				}
+			}
+			
+		}
+		return descuento;
 	}
 	
 	public void calcularDescuentoCarrito(int diaDescuento, double porcentajeDescuentoDia, double porcentajeDescuentoEfectivo) {

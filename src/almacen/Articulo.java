@@ -56,7 +56,7 @@ public class Articulo {
 		return codBarras.matches("^[7]{1}[7]{1}[9]{1}[0-9]{10}$");	
 	}
 	
-	
+
 	
 	
 }

@@ -6,7 +6,7 @@ public class Cliente extends Actor{
 	private long dni;
 	private char sexo;
 	
-	public Cliente(int id, Contacto contacto, String apellido, String nombres, long dni, char sexo) {
+	public Cliente(int id, Contacto contacto, String apellido, String nombres, long dni, char sexo) throws Exception {
 		super(id, contacto);
 		setApellido(apellido);
 		setNombres(nombres);
@@ -31,14 +31,16 @@ public class Cliente extends Actor{
 	public long getDni() {
 		return dni;
 	}
-	public void setDni(long dni){
+	public void setDni(long dni) throws Exception{
+		if(!validarIdentificadorUnico(dni))	throw new Exception("Error: DNI invalido");
 		this.dni = dni;
 	}
 
 	public char getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
+	public void setSexo(char sexo) throws Exception{
+		if(!validarSexo(sexo)) throw new Exception("Error: Sexo invalido ('h' o 'm')");
 		this.sexo = sexo;
 	}
 }

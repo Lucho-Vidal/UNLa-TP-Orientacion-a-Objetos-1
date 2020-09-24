@@ -18,12 +18,11 @@ public class Comercio extends Actor {
 	private List<Articulo> lstArticulo = new ArrayList<Articulo>();
 
 	// Constructor
-	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm,
-			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo, List<DiaRetiro> lstDiaRetiro,
-			List<Carrito> lstCarrito) {
+	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento, 
+	int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo, List<DiaRetiro> lstDiaRetiro, List<Carrito> lstCarrito) throws Exception{
 		super(id, contacto);
 		this.nombreComercio = nombreComercio;
-		this.cuit = cuit;
+		setCuit(cuit);
 		this.costoFijo = costoFijo;
 		this.costoPorKm = costoPorKm;
 		this.diaDescuento = diaDescuento;
@@ -33,11 +32,10 @@ public class Comercio extends Actor {
 		this.lstCarrito = lstCarrito;
 	}
 
-	// Gets and Sets
+	// Getters and Setters
 	public String getNombreComercio() {
 		return nombreComercio;
 	}
-
 	public void setNombreComercio(String nombreComercio) {
 		this.nombreComercio = nombreComercio;
 	}
@@ -45,15 +43,14 @@ public class Comercio extends Actor {
 	public long getCuit() {
 		return cuit;
 	}
-
-	public void setCuit(long cuit) {
+	public void setCuit(long cuit) throws Exception{
+		if(!validarIdentificadorUnico(cuit))	throw new Exception("Error: CUIT invalido");
 		this.cuit = cuit;
 	}
 
 	public double getCostoFijo() {
 		return costoFijo;
 	}
-
 	public void setCostoFijo(double costoFijo) {
 		this.costoFijo = costoFijo;
 	}
@@ -61,7 +58,6 @@ public class Comercio extends Actor {
 	public double getCostoPorKm() {
 		return costoPorKm;
 	}
-
 	public void setCostoPorKm(double costoPorKm) {
 		this.costoPorKm = costoPorKm;
 	}
@@ -69,7 +65,6 @@ public class Comercio extends Actor {
 	public int getDiaDescuento() {
 		return diaDescuento;
 	}
-
 	public void setDiaDescuento(int diaDescuento) {
 		this.diaDescuento = diaDescuento;
 	}
@@ -77,7 +72,6 @@ public class Comercio extends Actor {
 	public int getPorcentajeDescuentoDia() {
 		return porcentajeDescuentoDia;
 	}
-
 	public void setPorcentajeDescuentoDia(int porcentajeDescuentoDia) {
 		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
 	}
@@ -85,7 +79,6 @@ public class Comercio extends Actor {
 	public int getPorcentajeDescuentoEfectivo() {
 		return porcentajeDescuentoEfectivo;
 	}
-
 	public void setPorcentajeDescuentoEfectivo(int porcentajeDescuentoEfectivo) {
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
 	}
@@ -93,7 +86,6 @@ public class Comercio extends Actor {
 	public List<DiaRetiro> getLstDiaRetiro() {
 		return lstDiaRetiro;
 	}
-
 	public void setLstDiaRetiro(List<DiaRetiro> lstDiaRetiro) {
 		this.lstDiaRetiro = lstDiaRetiro;
 	}
@@ -101,7 +93,6 @@ public class Comercio extends Actor {
 	public List<Carrito> getLstCarrito() {
 		return lstCarrito;
 	}
-
 	public void setLstCarrito(List<Carrito> lstCarrito) {
 		this.lstCarrito = lstCarrito;
 	}
@@ -109,7 +100,6 @@ public class Comercio extends Actor {
 	public List<Articulo> getLstArticulo() {
 		return lstArticulo;
 	}
-
 	public void setLstArticulo(List<Articulo> lstArticulo) {
 		this.lstArticulo = lstArticulo;
 	}
@@ -192,7 +182,7 @@ public class Comercio extends Actor {
 	}
 
 	public List<Turno> generarAgenda(LocalDate fecha) throws Exception {// retorna una lista de objetos Turno indicando
-																		// si está ocupado o libre.
+																		// si estï¿½ ocupado o libre.
 
 		List<Turno> agenda = new ArrayList<Turno>();
 
