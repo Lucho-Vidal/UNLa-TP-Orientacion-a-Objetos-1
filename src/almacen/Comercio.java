@@ -172,7 +172,7 @@ public class Comercio extends Actor {
 																		// si esta ocupado o libre.
 
 		List<Turno> agenda = new ArrayList<Turno>();
-		
+
 		int indiceLista = buscarIndiceDiaRetiro(fecha);
 
 		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
@@ -211,17 +211,19 @@ public class Comercio extends Actor {
 
 	}
 
-	public LocalTime traerHoraRetiro(LocalDate fecha) throws Exception {// busco la primer hora de retiro disponible para asignar a carrito
-		
-		int indiceLista=buscarIndiceDiaRetiro(fecha);
+	public LocalTime traerHoraRetiro(LocalDate fecha) throws Exception {// busco la primer hora de retiro disponible
+																		// para asignar a carrito
+
+		int indiceLista = buscarIndiceDiaRetiro(fecha);
 		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
-		boolean turnoLibre=false;
-		while(!turnoLibre) {
-			
-			if(!buscarSiEstaOcupado(hora))
-				turnoLibre=true; //si esta libre salimos del bucle
-			else 
-			hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// si esta ocupado sumamos el intervalo del diaRetiro
+		boolean turnoLibre = false;
+		while (!turnoLibre) {
+
+			if (!buscarSiEstaOcupado(hora))
+				turnoLibre = true; // si esta libre salimos del bucle
+			else
+				hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// si esta ocupado sumamos el
+																						// intervalo del diaRetiro
 		}
 		return hora;
 	}
@@ -236,9 +238,10 @@ public class Comercio extends Actor {
 		}
 		if (indiceLista == -1)
 			throw new Exception("En la fecha ingresada no se realizan entregas: " + fecha);
-		
+
 		return indiceLista;
 	}
+
 	private boolean buscarSiEstaOcupado(LocalTime hora) {
 		boolean ocupado = false;
 		for (int i = 0; i < lstDiaRetiro.size(); i++) {// busquemos si el turno esta asignado a una entrega

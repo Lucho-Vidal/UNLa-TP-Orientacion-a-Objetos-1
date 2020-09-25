@@ -5,7 +5,7 @@ public class Articulo {
 	private String nombre;
 	private String codBarras;
 	private double precio;
-	
+
 	public Articulo(int id, String nombre, String codBarras, double precio) throws Exception {
 		super();
 		this.id = id;
@@ -35,11 +35,10 @@ public class Articulo {
 	}
 
 	public void setCodBarras(String codBarras) throws Exception {
-		boolean valido=validarCodBarras(codBarras);
-		if(valido) {
-			this.codBarras=codBarras;
-		}
-		else {
+		boolean valido = validarCodBarras(codBarras);
+		if (valido) {
+			this.codBarras = codBarras;
+		} else {
 			throw new Exception("Codigo de barras no valido");
 		}
 	}
@@ -51,12 +50,9 @@ public class Articulo {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	
-	public boolean validarCodBarras(String codBarras) {
-		return codBarras.matches("^[7]{1}[7]{1}[9]{1}[0-9]{10}$");	
-	}
-	
 
-	
-	
+	public boolean validarCodBarras(String codBarras) {
+		return codBarras.matches("^[7]{1}[7]{1}[9]{1}[0-9]{10}$");
+	}
+
 }
