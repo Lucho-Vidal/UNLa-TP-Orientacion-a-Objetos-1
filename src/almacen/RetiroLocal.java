@@ -6,7 +6,7 @@ public class RetiroLocal extends Entrega {
 
 	public RetiroLocal(int id, LocalDate fecha, boolean efectivo, LocalTime horaEntrega) {
 		super(id, fecha, efectivo);
-		this.horaEntrega = horaEntrega;
+		this.setHoraEntrega(horaEntrega);
 	}
 
 	public LocalTime getHoraEntrega() {

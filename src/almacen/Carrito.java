@@ -2,7 +2,6 @@ package almacen;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -26,8 +25,7 @@ public class Carrito {
 		this.descuento = descuento;
 		this.cliente = cliente;
 		this.lstItemCarrito= new ArrayList<ItemCarrito>();
-		this.entrega = entrega;
-		
+		this.setEntrega(entrega); 
 	}
 
 	public int getId() {
@@ -115,7 +113,6 @@ public class Carrito {
 		//Si el articulo ya existe
 		if(traerItemCarrito(articulo)!=null) {
 			cantidad = traerItemCarrito(articulo).getCantidad()+cantidad;
-			
 		} 
 		
 		ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
@@ -153,14 +150,14 @@ public class Carrito {
 	public void calcularDescuentoCarrito(int diaDescuento, double porcentajeDescuentoDia, double porcentajeDescuentoEfectivo) {
 		double efectivo= calcularDescuentoEfectivo(porcentajeDescuentoEfectivo);
 		double dia= calcularDescuentoDia(diaDescuento,porcentajeDescuentoDia);
-		double mayor=0.0;
+		double descuentoMayor=0.0;
 		if(efectivo>dia) {
-			mayor=efectivo;
+			descuentoMayor=efectivo;
 		}
 		else {
-			mayor=dia;
+			descuentoMayor=dia;
 		}
-		setDescuento(mayor);
+		setDescuento(descuentoMayor);
 	}
 	
 	public double totalAPagarCarrito() {
