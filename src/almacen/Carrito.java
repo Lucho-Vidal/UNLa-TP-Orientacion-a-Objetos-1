@@ -13,7 +13,7 @@ public class Carrito {
 	private boolean cerrado;
 	private double descuento;
 	private Cliente cliente;
-	private List<ItemCarrito> lstItemCarrito = new ArrayList<ItemCarrito>();
+	private List<ItemCarrito> lstItemCarrito;
 	private Entrega entrega;
 
 	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente,
@@ -25,7 +25,9 @@ public class Carrito {
 		this.cerrado = cerrado;
 		this.descuento = descuento;
 		this.cliente = cliente;
+		this.lstItemCarrito= new ArrayList<ItemCarrito>();
 		this.entrega = entrega;
+		
 	}
 
 	public int getId() {
@@ -66,6 +68,7 @@ public class Carrito {
 
 	protected void setDescuento(double descuento) {
 		this.descuento = descuento;
+		
 	}
 
 	public Cliente getCliente() {
@@ -108,9 +111,13 @@ public class Carrito {
 	
 	// Si el articulo que intento agregar ya existe se lanza una excepcion, de lo
 	//contrario lo agrego a mi lista de itemCarrito
-	public boolean agregar(Articulo articulo, int cantidad) throws Exception{
-		if(traerItemCarrito(articulo)!=null) throw new Exception("El articulo ya existe"); 
+	public boolean agregar(Articulo articulo, int cantidad){
+		//Si el articulo ya existe
+		if(traerItemCarrito(articulo)!=null) {
+			cantidad = traerItemCarrito(articulo).getCantidad()+cantidad;
 			
+		} 
+		
 		ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
 		return lstItemCarrito.add(itemCarrito1);
 	}
@@ -155,8 +162,9 @@ public class Carrito {
 		}
 		setDescuento(mayor);
 	}
+	
 	public double totalAPagarCarrito() {
-		 //TODO
-		return 0;
+		double total= calcularTotalCarrito()-this.descuento;
+		return total;
 	}
 }
