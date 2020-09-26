@@ -35,9 +35,10 @@ public class Articulo {
 	}
 
 	public void setCodBarras(String codBarras) throws Exception {
-		boolean valido=validarCodBarras(codBarras);
-		if(!valido) throw new Exception("Codigo de barras no valido");
-		this.codBarras=codBarras;
+		boolean valido = validarCodBarras(codBarras);
+		if (!valido)
+			throw new Exception("Codigo de barras no valido");
+		this.codBarras = codBarras;
 	}
 
 	public double getPrecio() {
@@ -49,9 +50,9 @@ public class Articulo {
 	}
 
 	public boolean validarCodBarras(String codBarras) {
-		//Use expresiones regulares
-		//True
-		return codBarras.matches("^[7]{1}[7]{1}[9]{1}[0-9]{10}$");	
+		// Use expresiones regulares
+		// True
+		return codBarras.matches("^[7]{1}[7]{1}[9]{1}[0-9]{10}$");
 	}
 
 }

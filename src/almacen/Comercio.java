@@ -44,7 +44,8 @@ public class Comercio extends Actor {
 	}
 
 	public void setCuit(long cuit) throws Exception {
-		if(!validarIdentificadorUnico(cuit)) throw new Exception("Error: CUIT invalido");
+		if (!validarIdentificadorUnico(cuit))
+			throw new Exception("Error: CUIT invalido");
 		this.cuit = cuit;
 	}
 
@@ -104,6 +105,12 @@ public class Comercio extends Actor {
 		this.lstCarrito = lstCarrito;
 	}
 
+	public void addLstCarrito(Carrito carrito) {
+		if(lstCarrito==null)
+			lstCarrito = new ArrayList<Carrito>();
+		lstCarrito.add(carrito);
+	}
+
 	public List<Articulo> getLstArticulo() {
 		return lstArticulo;
 	}
@@ -112,14 +119,17 @@ public class Comercio extends Actor {
 		this.lstArticulo = lstArticulo;
 	}
 
+	public void addLstArticulo(Articulo articulo) {
+		if (lstArticulo == null)
+			lstArticulo = new ArrayList<Articulo>();
+		lstArticulo.add(articulo);
+	}
 	// TODO realizar el Equals
 
 	// ToString
 	@Override
 	public String toString() {
-		return "Comercio [nombreComercio= " + nombreComercio + ", cuil= " + cuit + ", costoFijo= " + costoFijo
-				+ ", costoPorKm= " + costoPorKm + ", diaDescuento= " + diaDescuento + ", porcentajeDescuentoDia= "
-				+ porcentajeDescuentoDia + ", porcentajeDescuentoEfectivo= " + porcentajeDescuentoEfectivo + "]";
+		return "Comercio [nombreComercio = " + nombreComercio + ", cuil = " + cuit + "]";
 	}
 
 	// Metodos de casos de uso
@@ -244,11 +254,12 @@ public class Comercio extends Actor {
 	private boolean buscarSiEstaOcupado(LocalTime hora) {
 		boolean ocupado = false;
 		for (int i = 0; i < lstDiaRetiro.size(); i++) {// busquemos si el turno esta asignado a una entrega
-			Entrega entrega = lstCarrito.get(i).getEntrega();
-			if (entrega instanceof RetiroLocal) {// si la entrega es retiro local
-				if (hora == ((RetiroLocal) entrega).getHoraEntrega()) {// casteamos para obtener la fecha e igualarla
-																		// con hora
-					ocupado = true;
+			if (lstCarrito != null) {
+				Entrega entrega = lstCarrito.get(i).getEntrega();
+				if (entrega instanceof RetiroLocal) {// si la entrega es retiro local
+					if (hora == ((RetiroLocal) entrega).getHoraEntrega())// casteamos para obtener la fecha e igualarla
+																			// con hora
+						ocupado = true;
 				}
 			}
 		}
