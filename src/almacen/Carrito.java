@@ -27,6 +27,20 @@ public class Carrito {
 		this.lstItemCarrito= new ArrayList<ItemCarrito>();
 		this.setEntrega(entrega); 
 	}
+	
+	
+	//Constructor sobrecargado sin Entrega entrega
+	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente) {
+		super();
+		this.id = id;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.cerrado = cerrado;
+		this.descuento = descuento;
+		this.cliente = cliente;
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -94,8 +108,16 @@ public class Carrito {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "Carrito [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", cerrado=" + cerrado + ", descuento="
+				+ descuento + ", cliente=" + cliente + ", lstItemCarrito=" + lstItemCarrito + ", entrega=" + entrega
+				+ "]/n";
+	}
 	
-	// Metodos
+	public boolean equals(Carrito carrito) {
+		return (id==carrito.getId());
+	}
 	
 	// Trae un articulo de la lista itemCArrito
 	public ItemCarrito traerItemCarrito(Articulo articulo) {
@@ -104,23 +126,24 @@ public class Carrito {
 			if(i.getArticulo()==articulo) {
 				itemAuxiliar = i;
 				
+				
 			}
 		}
 		return itemAuxiliar;
 	}
 	
 	//Agrego articulos y una cantidad a la lista de itemCarrito
-	public boolean agregar(Articulo articulo, int cantidad){
+	public boolean agregarItem(Articulo articulo, int cantidad){
 		//Si el articulo ya existe, sumo la cantidad de los dos articulos iguales
-		if(traerItemCarrito(articulo)!=null) {
-			ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
-			return lstItemCarrito.add(itemCarrito1);
-		} 
+		if(traerItemCarrito(articulo)!=null);
 		
 		ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
 		return lstItemCarrito.add(itemCarrito1);
 	}
 	
+	
+	
+
 	//Es el total pero sin descuento.
 	public double calcularTotalCarrito() {
 		double total = 0.0;
@@ -147,14 +170,13 @@ public class Carrito {
 				//Si la cantidad de articulos es mayor o igual a dos realizo descuento
 				if(cantidad>=2) {
 					int nuevaCantidad= cantidad/2;
-					descuento = (nuevaCantidad*i.getArticulo().getPrecio()*porcentajeDescuentoDia)/100;
-					
+					descuento = (nuevaCantidad*i.getArticulo().getPrecio()*porcentajeDescuentoDia)/100;	
 				}
 			}
-			
 		}
 		return descuento;
 	}
+	
 	//Determino cual descuento es mas efectivo, si por dia o efectivo
 	public void calcularDescuentoCarrito(int diaDescuento,double porcentajeDescuentoDia, double porcentajeDescuentoEfectivo) {
 		double efectivo= calcularDescuentoEfectivo(porcentajeDescuentoEfectivo);

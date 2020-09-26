@@ -35,8 +35,7 @@ public class Articulo {
 	}
 
 	public void setCodBarras(String codBarras) throws Exception {
-		boolean valido = validarCodBarras(codBarras);
-		if (!valido)
+		if (!validarCodBarras(codBarras))
 			throw new Exception("Codigo de barras no valido");
 		this.codBarras = codBarras;
 	}
@@ -47,6 +46,16 @@ public class Articulo {
 
 	public void setPrecio(double precio) {
 		this.precio = precio;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Articulo [id=" + id + ", nombre=" + nombre + ", codBarras=" + codBarras + ", precio=" + precio + "]";
+	}
+	
+	public boolean equals(Articulo articulo) {
+		return (id==articulo.getId());
 	}
 
 	public boolean validarCodBarras(String codBarras) {

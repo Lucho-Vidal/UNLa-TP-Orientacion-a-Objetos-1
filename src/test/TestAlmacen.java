@@ -84,21 +84,19 @@ public class TestAlmacen {
 
 			Carrito carrito = new Carrito(1, LocalDate.now(), LocalTime.now(), false, 5, cliente1, entrega);
 			System.out.println("Carrito: " + carrito.toString());
-			carrito.agregar(almacen.getLstArticulo().get(0), 3);
-			carrito.agregar(almacen.getLstArticulo().get(0), 2);
+			carrito.agregarItem(almacen.getLstArticulo().get(0), 3);
+			carrito.agregarItem(almacen.getLstArticulo().get(0), 2);
 			// Calculo el total de carrito.
 			System.out.println("Calcular Total Carrito " + carrito.calcularTotalCarrito());
-			// Calculo de cuanto es el descuento en efectvio
-			System.out.println("Calcular Descuento Efectivo " + carrito.calcularDescuentoEfectivo(10));
-			// Calculo de cuanto es el descuento, si el dia es Miercoles
-			// Pero como el dia es Martes, el descuento es de cero
-			System.out.println("Calcular Descuento Dia: " + carrito.calcularDescuentoDia(2, 10));
-			// Me fijo cual descuento es mejor
+			
+			// Determino cual descuento es mejor
 			carrito.calcularDescuentoCarrito(2, 10, 10);
 			// Calculo cuanto debo pagar con descuento incluido--- el mejor decuento es el
 			// de pago con efectivo
-			System.out.println("Total a Pagar: " + carrito.totalAPagarCarrito());
-
+			System.out.println("Total a Pagar con descuento incluido: " + carrito.totalAPagarCarrito());
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

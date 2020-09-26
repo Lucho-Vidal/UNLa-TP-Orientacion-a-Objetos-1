@@ -19,7 +19,7 @@ public class Comercio extends Actor {
 
 	// Constructor
 	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm,
-			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) {
+			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo){
 		super(id, contacto);
 		this.nombreComercio = nombreComercio;
 		this.cuit = cuit;
@@ -28,6 +28,7 @@ public class Comercio extends Actor {
 		this.diaDescuento = diaDescuento;
 		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
+		
 	}
 
 	// Getters and Setters
@@ -265,4 +266,6 @@ public class Comercio extends Actor {
 		}
 		return ocupado;
 	}
+	
+	
 }

@@ -28,6 +28,10 @@ public class ItemCarrito {
 		return "ItemCarrito [articulo=" + articulo + ", cantidad=" + cantidad + "]";
 	}
 	
+	public boolean equals(ItemCarrito itemCarrito) {
+		return (articulo==itemCarrito.getArticulo() && (cantidad==itemCarrito.getCantidad()));
+	}
+	
 	//Lo voy a usar despues en calcularTotalCarrito
 	//cantidad * precio del getArticulo()
 	public double calcularSubTotalItem() {
