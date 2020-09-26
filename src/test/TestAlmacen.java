@@ -10,14 +10,14 @@ import almacen.Contacto;
 import almacen.DiaRetiro;
 import almacen.Ubicacion;
 
-public class TestAlmancen {
+public class TestAlmacen {
 
 	public static void main(String[] args) {
-		
+
 		// creamos un Almacen y lo llamamos Almacen GGG 
 		Ubicacion ubicacionComercio = new Ubicacion(-34.733406,-58.393577);
 		Contacto contactoComercio= new Contacto("AlmanceGGG@gmail.com","1123234565",ubicacionComercio);
-		Comercio Almacen = new Comercio(1,contactoComercio,"Almacen G.G.G.",30707661492L,500,15,3,25,10);
+		Comercio almacen = new Comercio(1,contactoComercio,"Almacen G.G.G.",30707661492L,500,15,3,25,10);
 		
 		//Le asignamos los dias de entrega
 		List<DiaRetiro> lstDiaRetiro = new ArrayList<DiaRetiro>();
@@ -29,7 +29,7 @@ public class TestAlmancen {
 			DiaRetiro diaRetiro = new DiaRetiro(i,i,horaDesde,horaHasta,20);
 			lstDiaRetiro.add(diaRetiro);
 		}
-		Almacen.setLstDiaRetiro(lstDiaRetiro);
+		almacen.setLstDiaRetiro(lstDiaRetiro);
 		
 		//Agrego 4 clientes 
 		Ubicacion ubicacionContacto1 = new Ubicacion(-34.761078,-58.397547);
@@ -53,9 +53,6 @@ public class TestAlmancen {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 	}
 
