@@ -16,8 +16,6 @@ public class TestCarrito {
 		Carrito carrito1=new Carrito(1, LocalDate.now(), LocalTime.now(), false, 0, null, null);
 		Articulo articulo1= new Articulo(1, "Yerba", "7791236547852", 100.00);
 		Articulo articulo2= new Articulo(2, "Harina", "7796543217852", 50.00);
-		
-		
 		carrito1.agregar(articulo1, 4);
 		carrito1.agregar(articulo1, 2);
 		System.out.println(carrito1.calcularTotalCarrito());

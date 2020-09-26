@@ -56,7 +56,7 @@ public class TestAlmacen {
 			Cliente cliente4 = new Cliente(5, contactoLopez, "Lopez", "Eugenia", 43450121L, 'm');
 
 			// Agrego algunos articulos
-			List<Articulo> lstArticulos = new ArrayList<Articulo>();
+			/*List<Articulo> lstArticulos = new ArrayList<Articulo>();
 			Articulo[] articulo = new Articulo[5];
 
 			articulo[0] = new Articulo(1, "Leche", "7791234567890", 89.99);
@@ -68,13 +68,34 @@ public class TestAlmacen {
 			for (int i = 0; i < 5; i++) {
 				lstArticulos.add(articulo[i]);
 			}
+			almacen.setLstArticulo(lstArticulos);*/
 
-			almacen.setLstArticulo(lstArticulos);
-
+			Articulo a1= new Articulo(1, "Leche", "7791234567890", 89.99);
+			Articulo a2 = new Articulo(2, "Cerveza", "7792345678901", 24.99);
+			Articulo a3 = new Articulo(3, "Tomate", "7793456789012", 149.99);
+			Articulo a4 = new Articulo(4, "Queso", "7794567890123", 870.00);
+			Articulo a5 = new Articulo(5, "Huevos", "7795678901234", 250.00);
 			// Creo un Carrito
-			almacen.generarAgenda(LocalDate.now());
+			
+			
+			//almacen.generarAgenda(LocalDate.now()); //Tira error esta linea
+			
+			
 			Entrega entrega = new RetiroLocal(1, LocalDate.now(), true, LocalTime.now());
 			Carrito carrito = new Carrito(1, LocalDate.now(), LocalTime.now(), false, 5, cliente1, entrega);
+			carrito.agregar(a1, 3);
+			carrito.agregar(a1, 2);
+			//Calculo el total de carrito. 
+			System.out.println(carrito.calcularTotalCarrito());
+			//Calculo de cuanto es el descuento en efectvio
+			System.out.println(carrito.calcularDescuentoEfectivo(10));
+			//Calculo de cuanto es el descuento, si el dia es Miercoles
+			//Pero como el dia es Martes, el descuento es de cero
+			System.out.println(carrito.calcularDescuentoDia(2, 10));
+			//Me fijo cual descuento es mejor
+			carrito.calcularDescuentoCarrito(2,10, 10);
+			//Calculo cuanto debo pagar con descuento incluido--- el mejor decuento es el de pago con efectivo
+			System.out.println(carrito.totalAPagarCarrito());
 
 		} catch (Exception e) {
 			e.printStackTrace();
