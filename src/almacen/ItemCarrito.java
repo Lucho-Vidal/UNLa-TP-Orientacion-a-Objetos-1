@@ -29,6 +29,7 @@ public class ItemCarrito {
 	}
 	
 	//Lo voy a usar despues en calcularTotalCarrito
+	//cantidad * precio del getArticulo()
 	public double calcularSubTotalItem() {
 		double subTotal=articulo.getPrecio()*cantidad;
 		return subTotal;
