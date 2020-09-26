@@ -40,7 +40,11 @@ public class Cliente extends Actor{
 		return sexo;
 	}
 	public void setSexo(char sexo) throws Exception{
-		if(!validarSexo(sexo)) throw new Exception("Error: Sexo invalido ('h' o 'm')");
-		this.sexo = sexo;
+		if(!validarSexo(sexo)) throw new Exception("Error: Sexo invalido ('H' o 'M')");
+		this.sexo = Character.toUpperCase(sexo);
+	}
+
+	public boolean validarSexo(char sexo) {
+		return(sexo=='H' || sexo=='h' || sexo=='M' || sexo=='m');
 	}
 }

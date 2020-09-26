@@ -29,7 +29,7 @@ public abstract class Actor {
 		String identificadorString = String.valueOf(identificador); 	//se parsea el identificador a String para heredar sus metodos
 		
 		if(this instanceof Cliente) {															//Si es cliente tiene dni
-			return(identificadorString.length() == 8 || identificadorString.length() == 9);		//Los dni solo tienen 8 o 9 digitos
+			return(identificadorString.length() == 7 || identificadorString.length() == 8);		//Los dni solo tienen 8 o 9 digitos
 		}
 		
 		else if(identificadorString.length() != 11) {											//Si no es cliente es comercio y tiene cuit
@@ -47,9 +47,5 @@ public abstract class Actor {
 	    sum = 11 - (sum % 11);	//se desencripta la suma
 	    if(sum==11) sum=0; 		//se corrige excepcion
 	    return (sum==z);		// se evalua que la suma y el numero de validacion coincidan
-	}
-	
-	public boolean validarSexo(char sexo) {
-		return(sexo=='h' || sexo=='m');
 	}
 }

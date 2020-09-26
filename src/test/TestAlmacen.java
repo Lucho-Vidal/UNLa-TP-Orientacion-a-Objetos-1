@@ -54,7 +54,7 @@ public class TestAlmacen {
 			Cliente cliente2 = new Cliente(3, contactoJerochim, "Jerochim", "Emiliano", 40500720L, 'h');
 			Cliente cliente3 = new Cliente(4, contactoSilvestri, "Silvestri", "Matias", 41926641L, 'h');
 			Cliente cliente4 = new Cliente(5, contactoLopez, "Lopez", "Eugenia", 43450121L, 'm');
-
+			
 			// Agrego algunos articulos
 			/*List<Articulo> lstArticulos = new ArrayList<Articulo>();
 			Articulo[] articulo = new Articulo[5];
