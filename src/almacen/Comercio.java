@@ -18,8 +18,10 @@ public class Comercio extends Actor {
 	private List<Articulo> lstArticulo;
 
 	// Constructor
+
 	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm,
-			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo){
+			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo, List<DiaRetiro> lstDiaRetiro,
+			List<Carrito> lstCarrito, List<Articulo> lstArticulo) {
 		super(id, contacto);
 		this.nombreComercio = nombreComercio;
 		this.cuit = cuit;
@@ -28,7 +30,23 @@ public class Comercio extends Actor {
 		this.diaDescuento = diaDescuento;
 		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
-		
+		this.lstDiaRetiro = lstDiaRetiro;
+		this.lstCarrito = lstCarrito;
+		this.lstArticulo = lstArticulo;
+	}
+
+	// Constructor Sobrecargado
+	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm,
+			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) {
+		super(id, contacto);
+		this.nombreComercio = nombreComercio;
+		this.cuit = cuit;
+		this.costoFijo = costoFijo;
+		this.costoPorKm = costoPorKm;
+		this.diaDescuento = diaDescuento;
+		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
+		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
+
 	}
 
 	// Getters and Setters
@@ -107,7 +125,7 @@ public class Comercio extends Actor {
 	}
 
 	public void addLstCarrito(Carrito carrito) {
-		if(lstCarrito==null)
+		if (lstCarrito == null)
 			lstCarrito = new ArrayList<Carrito>();
 		lstCarrito.add(carrito);
 	}
@@ -125,7 +143,11 @@ public class Comercio extends Actor {
 			lstArticulo = new ArrayList<Articulo>();
 		lstArticulo.add(articulo);
 	}
-	// TODO realizar el Equals
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.cuit == ((Comercio) obj).cuit;
+	}
 
 	// ToString
 	@Override
@@ -235,5 +257,4 @@ public class Comercio extends Actor {
 		}
 		return ocupado;
 	}
-	
 }

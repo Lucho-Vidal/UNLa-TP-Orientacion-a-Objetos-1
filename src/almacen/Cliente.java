@@ -47,4 +47,10 @@ public class Cliente extends Actor{
 	public boolean validarSexo(char sexo) {
 		return(sexo=='H' || sexo=='h' || sexo=='M' || sexo=='m');
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [apellido=" + apellido + ", nombres=" + nombres + ", dni=" + dni + ", sexo=" + sexo + "]";
+	}
+	
 }
