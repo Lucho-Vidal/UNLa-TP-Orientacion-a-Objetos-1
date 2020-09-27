@@ -17,7 +17,6 @@ public class Articulo {
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -25,7 +24,6 @@ public class Articulo {
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -33,7 +31,6 @@ public class Articulo {
 	public String getCodBarras() {
 		return codBarras;
 	}
-
 	public void setCodBarras(String codBarras) throws Exception {
 		if (!validarCodBarras(codBarras))
 			throw new Exception("Codigo de barras no valido");
@@ -43,7 +40,6 @@ public class Articulo {
 	public double getPrecio() {
 		return precio;
 	}
-
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
