@@ -15,8 +15,7 @@ public class Carrito {
 	private List<ItemCarrito> lstItemCarrito;
 	private Entrega entrega;
 
-	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente,
-			Entrega entrega) {
+	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente, Entrega entrega) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -27,7 +26,6 @@ public class Carrito {
 		this.lstItemCarrito= new ArrayList<ItemCarrito>();
 		this.setEntrega(entrega); 
 	}
-	
 	
 	//Constructor sobrecargado sin Entrega entrega
 	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente) {
@@ -41,11 +39,9 @@ public class Carrito {
 	}
 
 
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -53,7 +49,6 @@ public class Carrito {
 	public LocalDate getFecha() {
 		return fecha;
 	}
-
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
@@ -61,7 +56,6 @@ public class Carrito {
 	public LocalTime getHora() {
 		return hora;
 	}
-
 	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
@@ -69,7 +63,6 @@ public class Carrito {
 	public boolean isCerrado() {
 		return cerrado;
 	}
-
 	public void setCerrado(boolean cerrado) {
 		this.cerrado = cerrado;
 	}
@@ -77,7 +70,6 @@ public class Carrito {
 	public double getDescuento() {
 		return descuento;
 	}
-
 	protected void setDescuento(double descuento) {
 		this.descuento = descuento;
 		
@@ -86,7 +78,6 @@ public class Carrito {
 	public Cliente getCliente() {
 		return cliente;
 	}
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -94,7 +85,6 @@ public class Carrito {
 	public List<ItemCarrito> getLstItemCarrito() {
 		return lstItemCarrito;
 	}
-
 	public void setLstItemCarrito(List<ItemCarrito> lstItemCarrito) {
 		this.lstItemCarrito = lstItemCarrito;
 	}
@@ -102,7 +92,6 @@ public class Carrito {
 	public Entrega getEntrega() {
 		return entrega;
 	}
-
 	public void setEntrega(Entrega entrega) {
 		this.entrega = entrega;
 	}
@@ -111,13 +100,14 @@ public class Carrito {
 	@Override
 	public String toString() {
 		return "Carrito [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", cerrado=" + cerrado + ", descuento="
-				+ descuento + ", cliente=" + cliente + ", lstItemCarrito=" + lstItemCarrito + ", entrega=" + entrega
-				+ "]/n";
+		+ descuento + ", cliente=" + cliente + ", lstItemCarrito=" + lstItemCarrito + ", entrega=" + entrega + "]/n";
 	}
 	
 	public boolean equals(Carrito carrito) {
 		return (id==carrito.getId());
 	}
+	
+	
 	
 	// Trae un articulo de la lista itemCArrito
 	public ItemCarrito traerItemCarrito(Articulo articulo) {
@@ -125,8 +115,6 @@ public class Carrito {
 		for(ItemCarrito i: this.lstItemCarrito) {
 			if(i.getArticulo()==articulo) {
 				itemAuxiliar = i;
-				
-				
 			}
 		}
 		return itemAuxiliar;
@@ -134,16 +122,14 @@ public class Carrito {
 	
 	//Agrego articulos y una cantidad a la lista de itemCarrito
 	public boolean agregarItem(Articulo articulo, int cantidad){
-		//Si el articulo ya existe, sumo la cantidad de los dos articulos iguales
-		if(traerItemCarrito(articulo)!=null);
-		
-		ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
-		return lstItemCarrito.add(itemCarrito1);
+		if(traerItemCarrito(articulo)!=null) {	//Si el articulo ya existe, sumo la cantidad de los dos articulos iguales
+			traerItemCarrito(articulo).setCantidad((traerItemCarrito(articulo).getCantidad() + cantidad));
+			return true;
+		}
+		return lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
 	}
 	
 	
-	
-
 	//Es el total pero sin descuento.
 	public double calcularTotalCarrito() {
 		double total = 0.0;
@@ -193,7 +179,6 @@ public class Carrito {
 	
 	//Total a pagar pero ya con el descuento
 	public double totalAPagarCarrito() {
-		double total= calcularTotalCarrito()-descuento;
-		return total;
+		return calcularTotalCarrito() - descuento;
 	}
 }
