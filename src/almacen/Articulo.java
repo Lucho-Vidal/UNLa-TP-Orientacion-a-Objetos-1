@@ -47,7 +47,7 @@ public class Articulo {
 
 	@Override
 	public String toString() {
-		return "Articulo [id=" + id + ", nombre=" + nombre + ", codBarras=" + codBarras + ", precio=" + precio + "]";
+		return "Articulo [id=" + id + ", codBarras=" + codBarras + ", nombre=" + nombre + ", precio=" + precio + "]";
 	}
 	
 	public boolean equals(Articulo articulo) {

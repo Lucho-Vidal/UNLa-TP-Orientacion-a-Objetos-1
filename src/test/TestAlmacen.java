@@ -24,6 +24,7 @@ public class TestAlmacen {
 		Ubicacion ubicacionComercio = new Ubicacion(-34.733406, -58.393577);
 		Contacto contactoComercio = new Contacto("AlmanceGGG@gmail.com", "1123234565", ubicacionComercio);
 		Comercio almacen = new Comercio(1, contactoComercio, "Almacen G.G.G.", 30707661492L, 500, 15, 3, 25, 10);
+		LocalDate fecha = LocalDate.of(2020, 9, 29);
 
 		// Le asignamos los dias de entrega
 		List<DiaRetiro> lstDiaRetiro = new ArrayList<DiaRetiro>();
@@ -71,18 +72,18 @@ public class TestAlmacen {
 			}
 
 			// Creo un Carrito con cliente1 
-			Carrito carrito = new Carrito(1, LocalDate.of(2020, 9, 29), LocalTime.of(12, 0), false, 5, cliente1);//faltan los articulos y la entrega y los descuentos
+			Carrito carrito = new Carrito(1, fecha, LocalTime.of(12, 0), false, 5, cliente1);//faltan los articulos y la entrega y los descuentos
 			
 			//agrego items a la lista 
-			//carrito.agregarItem(almacen.getLstArticulo().get(3), 3);
+			carrito.agregarItem(almacen.getLstArticulo().get(3), 3);
 			carrito.agregarItem(almacen.getLstArticulo().get(3), 2);
 			carrito.agregarItem(almacen.getLstArticulo().get(1), 4);
 			carrito.agregarItem(almacen.getLstArticulo().get(3), 4);
-			carrito.agregarItem(almacen.getLstArticulo().get(4), 8);
-			carrito.agregarItem(almacen.getLstArticulo().get(2), 5);
+			carrito.agregarItem(almacen.getLstArticulo().get(0), 8);
+			carrito.agregarItem(almacen.getLstArticulo().get(2), 6);
 			
 			//creo la entrega por retiroLocal con la primer hora disponible de la fecha
-			Entrega entrega = new RetiroLocal(1, LocalDate.of(2020, 9, 29), true, almacen.traerHoraRetiro(LocalDate.of(2020, 9, 29)));
+			Entrega entrega = new RetiroLocal(1, fecha, true, almacen.traerHoraRetiro(fecha));
 			
 			//agrego la entrega al carrito
 			carrito.setEntrega(entrega);
@@ -93,18 +94,23 @@ public class TestAlmacen {
 			
 			//cierro el carrito
 			carrito.setCerrado(true);
-			
+			almacen.addLstCarrito(carrito);
 			//Calculo los totales e imprimo
 			
-			System.out.println(carrito.getLstItemCarrito());
-			
-			
-			
-			
-			
-			
-			
-			
+			System.out.println(almacen);
+			System.out.println("----------------------------------");
+			System.out.println(almacen.getLstCarrito().get(0).getLstItemCarrito());
+			System.out.println("SubTotal Carrito = $"+almacen.getLstCarrito().get(0).calcularTotalCarrito());
+			System.out.print("Descuento = $");
+			System.out.println( carrito.calcularTotalCarrito()-carrito.totalAPagarCarrito());
+			System.out.println("Total con Descuentos = $"+almacen.getLstCarrito().get(0).totalAPagarCarrito());
+			System.out.println("Entrega = "+almacen.getLstCarrito().get(0).getEntrega());
+			System.out.println("----------------------------------");
+
+			//imprimo la agenda
+			System.out.println("Agenda de la fecha: "+almacen.generarAgenda(fecha));
+			System.out.println("Turnos ocupados: "+almacen.traerTurnosOcupados(fecha));
+			System.out.println("Turnos disponibles: "+almacen.generarTurnosLibres(fecha));
 			
 			
 		} catch (Exception e) {

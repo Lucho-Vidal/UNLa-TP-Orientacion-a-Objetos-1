@@ -25,7 +25,7 @@ public class ItemCarrito {
 
 	@Override
 	public String toString() {
-		return "\nItemCarrito [articulo = " + articulo + ", cantidad = " + cantidad +", Subtotal = "+ calcularSubTotalItem() + "]";
+		return "\nItemCarrito [ " + articulo + ", cantidad = " + cantidad +", Subtotal = "+ calcularSubTotalItem() + "]";
 	}
 	
 	public boolean equals(ItemCarrito itemCarrito) {

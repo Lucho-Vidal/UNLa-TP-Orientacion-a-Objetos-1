@@ -192,7 +192,7 @@ public class Comercio extends Actor {
 		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
 
 		while(hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
-																			// busco si el el turno fue asignado a un retiroLocal en la lista Carrito
+																			// busco si el el turno fue asignado a un Carrito en la lista Carrito
 			agenda.add(new Turno(fecha, hora, buscarSiEstaOcupado(hora))); // creo un turno disponible u ocupado y lo agrego a la lista agenda
 			hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// sumamos el intervalo del diaRetiro
 		}
@@ -246,8 +246,8 @@ public class Comercio extends Actor {
 
 	private boolean buscarSiEstaOcupado(LocalTime hora) {
 		boolean ocupado = false;
-		for(int i=0; i<lstDiaRetiro.size(); i++) {// busquemos si el turno esta asignado a una entrega
-			if(lstCarrito != null) {
+		if(lstCarrito != null) {
+			for(int i=0; i<lstCarrito.size(); i++) {// busquemos si el turno esta asignado a una entrega
 				Entrega entrega = lstCarrito.get(i).getEntrega();
 				if(entrega instanceof RetiroLocal) {// si la entrega es retiro local
 					if(hora == ((RetiroLocal) entrega).getHoraEntrega())// casteamos para obtener la fecha e igualarla con hora

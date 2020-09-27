@@ -112,9 +112,11 @@ public class Carrito {
 	// Trae un articulo de la lista itemCArrito
 	public ItemCarrito traerItemCarrito(Articulo articulo) {
 		ItemCarrito itemAuxiliar = null;
-		for(ItemCarrito i: this.lstItemCarrito) {
-			if(i.getArticulo()==articulo) {
-				itemAuxiliar = i;
+		if(lstItemCarrito!=null){
+			for(ItemCarrito i: this.lstItemCarrito) {
+				if(i.getArticulo()==articulo) {
+					itemAuxiliar = i;
+				}
 			}
 		}
 		return itemAuxiliar;
@@ -122,11 +124,15 @@ public class Carrito {
 	
 	//Agrego articulos y una cantidad a la lista de itemCarrito
 	public boolean agregarItem(Articulo articulo, int cantidad){
+		
 		if(traerItemCarrito(articulo)!=null) {	//Si el articulo ya existe, sumo la cantidad de los dos articulos iguales
 			traerItemCarrito(articulo).setCantidad((traerItemCarrito(articulo).getCantidad() + cantidad));
-			return true;
+		}else {
+			if(lstItemCarrito ==null)
+				lstItemCarrito = new ArrayList<ItemCarrito>();
+			lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
 		}
-		return lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
+		return true;
 	}
 	
 	
