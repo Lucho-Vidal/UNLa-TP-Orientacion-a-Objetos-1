@@ -130,6 +130,22 @@ public class Carrito {
 	}
 	
 	
+	public boolean sacarItem(Articulo articulo, int cantidad) {
+		if(traerItemCarrito(articulo)!=null) {//Si el articulo existe
+			if(traerItemCarrito(articulo).getCantidad()>cantidad) {//Si el articulo existe y la cantidad ingresada es menor
+				traerItemCarrito(articulo).setCantidad((traerItemCarrito(articulo).getCantidad() - cantidad));//resto las cantidades
+				return true; 
+			}
+			if(traerItemCarrito(articulo).getCantidad()==cantidad) {//Si el articulo existe y la cantidad ingresada es igual
+				lstItemCarrito.remove(traerItemCarrito(articulo));  //Saco el articulo
+				return true;
+			}
+	
+		}
+		return false;
+	
+	}
+	
 	//Es el total pero sin descuento.
 	public double calcularTotalCarrito() {
 		double total = 0.0;

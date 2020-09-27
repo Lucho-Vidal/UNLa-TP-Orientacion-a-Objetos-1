@@ -15,13 +15,16 @@ public class TestCarrito {
 			carrito1.agregarItem(articulo1, 4);
 			carrito1.agregarItem(articulo1, 2);
 			System.out.println(carrito1.traerItemCarrito(articulo1).getCantidad());
-			// System.out.println(carrito1.calcularTotalCarrito());
+			System.out.println(carrito1.calcularTotalCarrito());
+			
+			carrito1.sacarItem(articulo1, 5);
+			System.out.println(carrito1.traerItemCarrito(articulo1).getCantidad());
 			//System.out.println(carrito1.calcularDescuentoEfectivo(10));
 			//System.out.println(carrito1.calcularDescuentoDia(2, 10));
 			// carrito1.calcularDescuentoCarrito(2,10, 10);
 			// System.out.println(carrito1.totalAPagarCarrito());
 			// System.out.println(carrito1.traerItemCarrito(articulo1));
-			//System.out.println(carrito1.toString());
+			System.out.println(carrito1.toString());
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
