@@ -58,11 +58,10 @@ public class DiaRetiro {
 	public void setIntervalo(int intervalo) {
 		this.intervalo = intervalo;
 	}
-	
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		return this.diaSemana == ((DiaRetiro)obj).getDiaSemana();
+		return this.diaSemana == ((DiaRetiro) obj).getDiaSemana();
 	}
 
 	@Override

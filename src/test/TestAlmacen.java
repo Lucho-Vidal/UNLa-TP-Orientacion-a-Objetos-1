@@ -71,48 +71,51 @@ public class TestAlmacen {
 				almacen.addLstArticulo(articulo[i]);
 			}
 
-			// Creo un Carrito con cliente1 
-			Carrito carrito = new Carrito(1, fecha, LocalTime.of(12, 0), false, 5, cliente1);//faltan los articulos y la entrega y los descuentos
-			
-			//agrego items a la lista 
+			// Creo un Carrito con cliente1
+			Carrito carrito = new Carrito(1, fecha, LocalTime.of(12, 0), false, 5, cliente1);// faltan los articulos y
+																								// la entrega y los
+																								// descuentos
+
+			// agrego items a la lista
 			carrito.agregarItem(almacen.getLstArticulo().get(3), 3);
 			carrito.agregarItem(almacen.getLstArticulo().get(3), 2);
 			carrito.agregarItem(almacen.getLstArticulo().get(1), 4);
 			carrito.agregarItem(almacen.getLstArticulo().get(3), 4);
 			carrito.agregarItem(almacen.getLstArticulo().get(0), 8);
 			carrito.agregarItem(almacen.getLstArticulo().get(2), 6);
-			
-			//creo la entrega por retiroLocal con la primer hora disponible de la fecha
+
+			// creo la entrega por retiroLocal con la primer hora disponible de la fecha
 			Entrega entrega = new RetiroLocal(1, fecha, true, almacen.traerHoraRetiro(fecha));
-			
-			//agrego la entrega al carrito
+
+			// agrego la entrega al carrito
 			carrito.setEntrega(entrega);
-			
-			//Calculo de descuentos si corresponde
-			//calcularDescuentoDia y calcularDescuentoEfectivo estan implementados en calcularDescuentoCarrito
-			carrito.calcularDescuentoCarrito(carrito.getFecha().getDayOfWeek().getValue(), almacen.getPorcentajeDescuentoDia(),almacen.getPorcentajeDescuentoEfectivo());
-			
-			//cierro el carrito
+
+			// Calculo de descuentos si corresponde
+			// calcularDescuentoDia y calcularDescuentoEfectivo estan implementados en
+			// calcularDescuentoCarrito
+			carrito.calcularDescuentoCarrito(carrito.getFecha().getDayOfWeek().getValue(),
+					almacen.getPorcentajeDescuentoDia(), almacen.getPorcentajeDescuentoEfectivo());
+
+			// cierro el carrito
 			carrito.setCerrado(true);
 			almacen.addLstCarrito(carrito);
-			//Calculo los totales e imprimo
-			
+			// Calculo los totales e imprimo
+
 			System.out.println(almacen);
 			System.out.println("----------------------------------");
 			System.out.println(almacen.getLstCarrito().get(0).getLstItemCarrito());
-			System.out.println("SubTotal Carrito = $"+almacen.getLstCarrito().get(0).calcularTotalCarrito());
+			System.out.println("SubTotal Carrito = $" + almacen.getLstCarrito().get(0).calcularTotalCarrito());
 			System.out.print("Descuento = $");
-			System.out.println( carrito.calcularTotalCarrito()-carrito.totalAPagarCarrito());
-			System.out.println("Total con Descuentos = $"+almacen.getLstCarrito().get(0).totalAPagarCarrito());
-			System.out.println("Entrega = "+almacen.getLstCarrito().get(0).getEntrega());
+			System.out.println(carrito.calcularTotalCarrito() - carrito.totalAPagarCarrito());
+			System.out.println("Total con Descuentos = $" + almacen.getLstCarrito().get(0).totalAPagarCarrito());
+			System.out.println("Entrega = " + almacen.getLstCarrito().get(0).getEntrega());
 			System.out.println("----------------------------------");
 
-			//imprimo la agenda
-			System.out.println("Agenda de la fecha: "+almacen.generarAgenda(fecha));
-			System.out.println("Turnos ocupados: "+almacen.traerTurnosOcupados(fecha));
-			System.out.println("Turnos disponibles: "+almacen.generarTurnosLibres(fecha));
-			
-			
+			// imprimo la agenda
+			System.out.println("Agenda de la fecha: " + almacen.generarAgenda(fecha));
+			System.out.println("Turnos ocupados: " + almacen.traerTurnosOcupados(fecha));
+			System.out.println("Turnos disponibles: " + almacen.generarTurnosLibres(fecha));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
