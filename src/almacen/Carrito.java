@@ -112,11 +112,13 @@ public class Carrito {
 	// Trae un articulo de la lista itemCArrito
 	public ItemCarrito traerItemCarrito(Articulo articulo) {
 		ItemCarrito itemAuxiliar = null;
-		for(ItemCarrito i: this.lstItemCarrito) {
-			if(i.getArticulo()==articulo) {
-				itemAuxiliar = i;
+		if(this.lstItemCarrito.size() > 0) {
+			for(ItemCarrito i: this.lstItemCarrito) {
+				if(i.getArticulo()==articulo) {
+					itemAuxiliar = i;
+				}
 			}
-		}
+		}	
 		return itemAuxiliar;
 	}
 	
