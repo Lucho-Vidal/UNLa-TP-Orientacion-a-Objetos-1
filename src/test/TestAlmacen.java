@@ -70,30 +70,40 @@ public class TestAlmacen {
 				almacen.addLstArticulo(articulo[i]);
 			}
 
-			// Creo un Carrito
-			List<Turno> turnos = almacen.generarAgenda(LocalDate.now());
-			System.out.println(almacen.toString());
-			System.out.println(turnos);// Imprimo la agenda de turnos
-			Entrega entrega = new RetiroLocal(1, LocalDate.now(), true, almacen.traerHoraRetiro(LocalDate.now()));
-			turnos = almacen.traerTurnosOcupados(LocalDate.now());
+			// Creo un Carrito con cliente1 
+			Carrito carrito = new Carrito(1, LocalDate.of(2020, 9, 29), LocalTime.of(12, 0), false, 5, cliente1);//faltan los articulos y la entrega y los descuentos
+			
+			//agrego items a la lista 
+			//carrito.agregarItem(almacen.getLstArticulo().get(3), 3);
+			carrito.agregarItem(almacen.getLstArticulo().get(3), 2);
+			carrito.agregarItem(almacen.getLstArticulo().get(1), 4);
+			carrito.agregarItem(almacen.getLstArticulo().get(3), 4);
+			carrito.agregarItem(almacen.getLstArticulo().get(4), 8);
+			carrito.agregarItem(almacen.getLstArticulo().get(2), 5);
+			
+			//creo la entrega por retiroLocal con la primer hora disponible de la fecha
+			Entrega entrega = new RetiroLocal(1, LocalDate.of(2020, 9, 29), true, almacen.traerHoraRetiro(LocalDate.of(2020, 9, 29)));
+			
+			//agrego la entrega al carrito
+			carrito.setEntrega(entrega);
+			
+			//Calculo de descuentos si corresponde
+			//calcularDescuentoDia y calcularDescuentoEfectivo estan implementados en calcularDescuentoCarrito
+			carrito.calcularDescuentoCarrito(carrito.getFecha().getDayOfWeek().getValue(), almacen.getPorcentajeDescuentoDia(),almacen.getPorcentajeDescuentoEfectivo());
+			
+			//cierro el carrito
+			carrito.setCerrado(true);
+			
+			//Calculo los totales e imprimo
+			
+			System.out.println(carrito.getLstItemCarrito());
 			
 			
-
-			// TODO corregir toString para este caso
-			System.out.println("Turnos ocupados" + turnos.toString());// Imprimo los turnos ocupados
-
-			Carrito carrito = new Carrito(1, LocalDate.now(), LocalTime.now(), false, 5, cliente1, entrega);
-			System.out.println("Carrito: " + carrito.toString());
-			carrito.agregarItem(almacen.getLstArticulo().get(0), 3);
-			carrito.agregarItem(almacen.getLstArticulo().get(0), 2);
-			// Calculo el total de carrito.
-			System.out.println("Calcular Total Carrito " + carrito.calcularTotalCarrito());
 			
-			// Determino cual descuento es mejor
-			carrito.calcularDescuentoCarrito(2, 10, 10);
-			// Calculo cuanto debo pagar con descuento incluido--- el mejor decuento es el
-			// de pago con efectivo
-			System.out.println("Total a Pagar con descuento incluido: " + carrito.totalAPagarCarrito());
+			
+			
+			
+			
 			
 			
 			

@@ -138,12 +138,9 @@ public class Carrito {
 		if(traerItemCarrito(articulo)!=null);
 		
 		ItemCarrito itemCarrito1 = new ItemCarrito(articulo, cantidad);
-		return lstItemCarrito.add(itemCarrito1);
+		return lstItemCarrito.add(itemCarrito1); 
 	}
 	
-	
-	
-
 	//Es el total pero sin descuento.
 	public double calcularTotalCarrito() {
 		double total = 0.0;
