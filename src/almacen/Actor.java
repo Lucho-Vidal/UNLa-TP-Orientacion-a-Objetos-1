@@ -46,6 +46,6 @@ public abstract class Actor {
 	    
 	    sum = 11 - (sum % 11);	//se desencripta la suma
 	    if(sum==11) sum=0; 		//se corrige excepcion
-	    return (sum==z);		// se evalua que la suma y el numero de validacion coincidan
+		return (sum == z);		// se evalua que la suma y el numero de validacion coincidan
 	}
 }
