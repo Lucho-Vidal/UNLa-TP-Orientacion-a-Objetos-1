@@ -37,7 +37,7 @@ public class Carrito {
 		this.cerrado = cerrado;
 		this.descuento = descuento;
 		this.cliente = cliente;
-		this.lstItemCarrito= new ArrayList<ItemCarrito>();
+		this.lstItemCarrito = new ArrayList<ItemCarrito>();
 	}
 
 
@@ -114,42 +114,42 @@ public class Carrito {
 	// Trae un articulo de la lista itemCArrito
 	public ItemCarrito traerItemCarrito(Articulo articulo) {
 		ItemCarrito itemAuxiliar = null;
-		if(lstItemCarrito!=null){
-			for(ItemCarrito i: this.lstItemCarrito) {
-				if(i.getArticulo()==articulo) {
-					itemAuxiliar = i;
-				}
+		
+		for(ItemCarrito i: this.lstItemCarrito) {
+			if(i.getArticulo() == articulo) {
+				itemAuxiliar = i;
 			}
-		}	
+		}
 		return itemAuxiliar;
 	}
 	
 	//Agrego articulos y una cantidad a la lista de itemCarrito
 	public boolean agregarItem(Articulo articulo, int cantidad){
+		ItemCarrito itemAux = traerItemCarrito(articulo);
 		
-	
-		
-		if(traerItemCarrito(articulo)!=null) {	//Si el articulo ya existe, sumo la cantidad de los dos articulos iguales
-			
-			traerItemCarrito(articulo).setCantidad((traerItemCarrito(articulo).getCantidad() + cantidad));
-		}else {
-			lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
+		if(itemAux!=null) {												//Si el item ya existe
+			itemAux.setCantidad((itemAux.getCantidad() + cantidad));	//sumo la cantidad ingresada a la existente
+		}
+		else {															//sino
+			lstItemCarrito.add(new ItemCarrito(articulo, cantidad));	//creo un nuevo item con la cantidad ingresada
 		}
 		return true;
 	}
 	
 	
 	public boolean sacarItem(Articulo articulo, int cantidad) {
-		if(traerItemCarrito(articulo)!=null) {//Si el articulo existe
-			if(traerItemCarrito(articulo).getCantidad()>cantidad) {//Si el articulo existe y la cantidad ingresada es menor
-				traerItemCarrito(articulo).setCantidad((traerItemCarrito(articulo).getCantidad() - cantidad));//resto las cantidades
+		ItemCarrito itemAux = traerItemCarrito(articulo);
+		
+		if(itemAux!=null) {													//Si el articulo existe
+			if(itemAux.getCantidad() > cantidad) {							//Si la cantidad ingresada es menor
+				itemAux.setCantidad((itemAux.getCantidad() - cantidad));	//resto la cantidad ingresada a la existente
 			}
-			else {	//Si el articulo existe y la cantidad ingresada es igual o mayor
-				lstItemCarrito.remove(traerItemCarrito(articulo));  //Saco el articulo
+			else {															//Si la cantidad ingresada es igual o mayor
+				lstItemCarrito.remove(itemAux);  							//Saco el articulo
 			}
-			return true;
+			return true;	//operacion exitosa
 		}
-		return false;
+		return false;		//error
 	}
 	
 	//Es el total pero sin descuento.

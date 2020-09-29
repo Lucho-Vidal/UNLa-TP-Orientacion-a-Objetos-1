@@ -17,7 +17,6 @@ import almacen.RetiroLocal;
 import almacen.Ubicacion;
 
 public class TestAlmacen {
-
 	public static void main(String[] args) {
 
 		// creamos un Almacen y lo llamamos Almacen GGG
@@ -32,7 +31,6 @@ public class TestAlmacen {
 		LocalTime horaHasta = LocalTime.of(17, 00);
 
 		for (int i = 1; i < 7; i++) {// asigno horario de entrega lunes a Sabados de 10 a 17hs intervalo 20 minutos
-
 			DiaRetiro diaRetiro = new DiaRetiro(i, i, horaDesde, horaHasta, 20);
 			lstDiaRetiro.add(diaRetiro);
 		}
@@ -141,11 +139,9 @@ public class TestAlmacen {
 			System.out.println("\n");// saltos de linea
 			// Calculo los totales e imprimo carrito2
 			System.out.println(almacen);
-			System.out.println("Test del identificador unico: " + almacen.validarIdentificadorUnico(almacen.getCuit()));
 			System.out.println("----------------------------------");
 			System.out.println(cliente2);
-			System.out
-					.println("Test del identificador unico: " + cliente2.validarIdentificadorUnico(cliente2.getDni()));
+			
 			System.out.println("----------------------------------");
 			System.out.println(almacen.getLstCarrito().get(1).getLstItemCarrito());
 			System.out.println("SubTotal Carrito = $" + almacen.getLstCarrito().get(1).calcularTotalCarrito());
@@ -167,7 +163,5 @@ public class TestAlmacen {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
