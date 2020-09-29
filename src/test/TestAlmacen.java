@@ -1,5 +1,6 @@
 package test;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import almacen.DiaRetiro;
 import almacen.Entrega;
 import almacen.Envio;
 import almacen.RetiroLocal;
+import almacen.Turno;
 import almacen.Ubicacion;
 
 public class TestAlmacen {
@@ -58,6 +60,7 @@ public class TestAlmacen {
 			Cliente cliente4 = new Cliente(5, contactoLopez, "Lopez", "Eugenia", 43450121L, 'm');
 
 			// Agrego algunos articulos
+
 			Articulo[] articulo = new Articulo[5];
 
 			articulo[0] = new Articulo(1, "Leche", "7791234567890", 89.99);
@@ -75,7 +78,7 @@ public class TestAlmacen {
 			Carrito carrito = new Carrito(1, fecha, LocalTime.of(12, 0), false, 5, cliente1);// faltan los articulos y
 																								// la entrega y los
 																								// descuentos
-			//// Creo un Carrito2 con cliente2
+			// Creo un Carrito2 con cliente2
 			Carrito carrito2 = new Carrito(2, fecha, LocalTime.of(13, 0), false, 5, cliente2);
 
 			// agrego items a la lista de carrito
@@ -121,7 +124,7 @@ public class TestAlmacen {
 			carrito2.setCerrado(true);
 			almacen.addLstCarrito(carrito2);
 
-			// Calculo los totales e imprimo carrito
+			// Calculo los totales e imprimo
 			System.out.println(almacen);
 			System.out.println("Test del identificador unico: " + almacen.validarIdentificadorUnico(almacen.getCuit()));
 			System.out.println("----------------------------------");
@@ -155,6 +158,7 @@ public class TestAlmacen {
 			System.out.println("----------------------------------");
 
 			System.out.println("\n");// saltos de linea
+
 			// imprimo la agenda
 			System.out.println("Agenda de la fecha: " + almacen.generarAgenda(fecha));
 			System.out.println("\n");// saltos de linea

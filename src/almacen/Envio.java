@@ -9,14 +9,6 @@ public class Envio extends Entrega {
 	private Ubicacion ubicacion;
 
 	public Envio(int id, LocalDate fecha, boolean efectivo, LocalTime horaDesde, LocalTime horaHasta,
-			Ubicacion ubicacion) {
-		super(id, fecha, efectivo);
-		this.horaDesde = horaDesde;
-		this.horaHasta = horaHasta;
-		this.ubicacion = ubicacion;
-	}
-
-	public Envio(int id, LocalDate fecha, boolean efectivo, LocalTime horaDesde, LocalTime horaHasta,
 			Ubicacion ubicacionComercio, double costoFijo, double costoPorKm, Ubicacion ubicacion) {
 		super(id, fecha, efectivo);
 		this.horaDesde = horaDesde;
@@ -61,8 +53,7 @@ public class Envio extends Entrega {
 
 	@Override
 	public String toString() {
-		return "Envio [horaDesde = " + horaDesde + ", horaHasta = " + horaHasta + ", costo = " + costo
-				+ ", ubicacion = " + ubicacion + "]";
+		return "Envio [horaDesde = " + horaDesde + ", horaHasta = " + horaHasta + "," + ubicacion + "]";
 	}
 
 	public double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {

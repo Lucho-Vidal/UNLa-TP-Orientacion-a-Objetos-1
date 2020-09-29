@@ -2,6 +2,7 @@ package almacen;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -169,7 +170,10 @@ public class Carrito {
 	public double calcularDescuentoDia(int diaDescuento, double porcentajeDescuentoDia) {
 		double descuento = 0.0;
 		// 3= Miercoles, dia de descuento
-		if(diaDescuento==3) {
+		DayOfWeek dayOfWeek= DayOfWeek.of(3);
+		int dia=dayOfWeek.getValue();
+	
+		if(dia==diaDescuento) {
 			for(ItemCarrito i: this.lstItemCarrito) {
 				int cantidad= i.getCantidad();
 				//Si la cantidad de articulos es mayor o igual a dos realizo descuento
