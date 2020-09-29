@@ -1,6 +1,5 @@
 package test;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import almacen.DiaRetiro;
 import almacen.Entrega;
 import almacen.Envio;
 import almacen.RetiroLocal;
-import almacen.Turno;
 import almacen.Ubicacion;
 
 public class TestAlmacen {

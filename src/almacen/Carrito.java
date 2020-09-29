@@ -37,6 +37,7 @@ public class Carrito {
 		this.cerrado = cerrado;
 		this.descuento = descuento;
 		this.cliente = cliente;
+		this.lstItemCarrito= new ArrayList<ItemCarrito>();
 	}
 
 
@@ -126,11 +127,12 @@ public class Carrito {
 	//Agrego articulos y una cantidad a la lista de itemCarrito
 	public boolean agregarItem(Articulo articulo, int cantidad){
 		
+	
+		
 		if(traerItemCarrito(articulo)!=null) {	//Si el articulo ya existe, sumo la cantidad de los dos articulos iguales
+			
 			traerItemCarrito(articulo).setCantidad((traerItemCarrito(articulo).getCantidad() + cantidad));
 		}else {
-			if(lstItemCarrito ==null)
-				lstItemCarrito = new ArrayList<ItemCarrito>();
 			lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
 		}
 		return true;

@@ -53,7 +53,7 @@ public class Envio extends Entrega {
 
 	@Override
 	public String toString() {
-		return "Envio [horaDesde = " + horaDesde + ", horaHasta = " + horaHasta + "," + ubicacion + "]";
+		return "Envio [horaDesde = " + horaDesde + ", horaHasta = " + horaHasta + "," + ubicacion +", Costo: " + costo+"]";
 	}
 
 	public double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {
