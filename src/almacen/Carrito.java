@@ -128,7 +128,7 @@ public class Carrito {
 		ItemCarrito itemAux = traerItemCarrito(articulo);
 		
 		if(itemAux!=null) {												//Si el item ya existe
-			itemAux.setCantidad((itemAux.getCantidad() + cantidad));	//sumo la cantidad ingresada a la existente
+			traerItemCarrito(articulo).setCantidad((itemAux.getCantidad() + cantidad));	//sumo la cantidad ingresada a la existente
 		}
 		else {															//sino
 			lstItemCarrito.add(new ItemCarrito(articulo, cantidad));	//creo un nuevo item con la cantidad ingresada
@@ -142,7 +142,7 @@ public class Carrito {
 		
 		if(itemAux!=null) {													//Si el articulo existe
 			if(itemAux.getCantidad() > cantidad) {							//Si la cantidad ingresada es menor
-				itemAux.setCantidad((itemAux.getCantidad() - cantidad));	//resto la cantidad ingresada a la existente
+				traerItemCarrito(articulo).setCantidad((itemAux.getCantidad() - cantidad));	//resto la cantidad ingresada a la existente
 			}
 			else {															//Si la cantidad ingresada es igual o mayor
 				lstItemCarrito.remove(itemAux);  							//Saco el articulo
