@@ -46,7 +46,9 @@ public class Comercio extends Actor {
 		this.diaDescuento = diaDescuento;
 		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
-
+		this.lstDiaRetiro = new ArrayList<DiaRetiro>();
+		this.lstCarrito = new ArrayList<Carrito>();
+		this.lstArticulo = new ArrayList<Articulo>();
 	}
 
 	// Getters and Setters
@@ -125,8 +127,6 @@ public class Comercio extends Actor {
 	}
 
 	public void addLstCarrito(Carrito carrito) {
-		if (lstCarrito == null)
-			lstCarrito = new ArrayList<Carrito>();
 		lstCarrito.add(carrito);
 	}
 
@@ -139,8 +139,6 @@ public class Comercio extends Actor {
 	}
 
 	public void addLstArticulo(Articulo articulo) {
-		if (lstArticulo == null)
-			lstArticulo = new ArrayList<Articulo>();
 		lstArticulo.add(articulo);
 	}
 
@@ -193,7 +191,7 @@ public class Comercio extends Actor {
 		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
 
 		while (hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
-																				// busco si el el turno fue asignado a
+																				// busco si el turno fue asignado a
 																				// un Carrito en la lista Carrito
 			agenda.add(new Turno(fecha, hora, buscarSiEstaOcupado(hora))); // creo un turno disponible u ocupado y lo
 																			// agrego a la lista agenda
@@ -240,10 +238,12 @@ public class Comercio extends Actor {
 
 	private int buscarIndiceDiaRetiro(LocalDate fecha) throws Exception {
 		int indiceLista = -1;
-		for (int i = 0; i < lstDiaRetiro.size(); i++) {
+		int i = 0;
+		while((i < lstDiaRetiro.size())&&(indiceLista==-1)) {
 			if (fecha.getDayOfWeek().getValue() == lstDiaRetiro.get(i).getDiaSemana()) {// si coincide con diaSemana
 				indiceLista = i;
 			}
+			i++;
 		}
 		if (indiceLista == -1)
 			throw new Exception("En la fecha ingresada no se realizan entregas: " + fecha);
@@ -253,14 +253,16 @@ public class Comercio extends Actor {
 
 	private boolean buscarSiEstaOcupado(LocalTime hora) {
 		boolean ocupado = false;
+		int i = 0;
 		if (lstCarrito != null) {
-			for (int i = 0; i < lstCarrito.size(); i++) {// busquemos si el turno esta asignado a una entrega
+			while((i < lstCarrito.size())&&(!ocupado)) {// busquemos si el turno esta asignado a una entrega
 				Entrega entrega = lstCarrito.get(i).getEntrega();
 				if (entrega instanceof RetiroLocal) {// si la entrega es retiro local
 					if (hora == ((RetiroLocal) entrega).getHoraEntrega())// casteamos para obtener la fecha e igualarla
 																			// con hora
 						ocupado = true;
 				}
+				i++;
 			}
 		}
 		return ocupado;

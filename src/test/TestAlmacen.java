@@ -19,16 +19,17 @@ import almacen.Ubicacion;
 public class TestAlmacen {
 	public static void main(String[] args) {
 
+		LocalDate fecha = LocalDate.of(2020, 9, 29);// fecha dia martes utilizada en diferentes partes del test
+		LocalTime horaDesde = LocalTime.of(10, 00);
+		LocalTime horaHasta = LocalTime.of(17, 00);
+
 		// creamos un Almacen y lo llamamos Almacen GGG
-		Ubicacion ubicacionComercio = new Ubicacion(-34.733406, -58.393577);
-		Contacto contactoComercio = new Contacto("AlmanceGGG@gmail.com", "1123234565", ubicacionComercio);
-		Comercio almacen = new Comercio(1, contactoComercio, "Almacen G.G.G.", 30707661492L, 500, 15, 3, 25, 10);
-		LocalDate fecha = LocalDate.of(2020, 9, 29);
+		Comercio almacen = new Comercio(1,
+				new Contacto("AlmanceGGG@gmail.com", "1123234565", new Ubicacion(-34.733406, -58.393577)),
+				"Almacen G.G.G.", 30707661492L, 500, 15, 3, 25, 10);
 
 		// Le asignamos los dias de entrega
 		List<DiaRetiro> lstDiaRetiro = new ArrayList<DiaRetiro>();
-		LocalTime horaDesde = LocalTime.of(10, 00);
-		LocalTime horaHasta = LocalTime.of(17, 00);
 
 		for (int i = 1; i < 7; i++) {// asigno horario de entrega lunes a Sabados de 10 a 17hs intervalo 20 minutos
 			DiaRetiro diaRetiro = new DiaRetiro(i, i, horaDesde, horaHasta, 20);
@@ -50,32 +51,24 @@ public class TestAlmacen {
 		Contacto contactoLopez = new Contacto("eugelopez@gmail.com", "1125957841", ubicacionContacto4);
 
 		try {
-			Cliente cliente1 = new Cliente(2, contactoVidal, "Vidal", "Luciano", 35007121L, 'h');
+			Cliente cliente1 = new Cliente(2, contactoVidal, "Vidal", "Luciano", 35007121L, 'H');
 			Cliente cliente2 = new Cliente(3, contactoJerochim, "Jerochim", "Emiliano", 40500720L, 'h');
 			Cliente cliente3 = new Cliente(4, contactoSilvestri, "Silvestri", "Matias", 41926641L, 'h');
 			Cliente cliente4 = new Cliente(5, contactoLopez, "Lopez", "Eugenia", 43450121L, 'm');
 
-			// Agrego algunos articulos
-
-			Articulo[] articulo = new Articulo[5];
-
-			articulo[0] = new Articulo(1, "Leche", "7791234567890", 89.99);
-			articulo[1] = new Articulo(2, "Cerveza", "7792345678901", 24.99);
-			articulo[2] = new Articulo(3, "Tomate", "7793456789012", 149.99);
-			articulo[3] = new Articulo(4, "Queso", "7794567890123", 870.00);
-			articulo[4] = new Articulo(5, "Huevos", "7795678901234", 250.00);
-
-			// los agrego a la lista de Comercio
-			for (int i = 0; i < 5; i++) {
-				almacen.addLstArticulo(articulo[i]);
-			}
+			// Agrego algunos articulos a la lista de Comercio
+			almacen.addLstArticulo(new Articulo(1, "Leche", "7791234567890", 89.99));
+			almacen.addLstArticulo(new Articulo(2, "Cerveza", "7792345678901", 24.99));
+			almacen.addLstArticulo(new Articulo(3, "Tomate", "7793456789012", 149.99));
+			almacen.addLstArticulo(new Articulo(4, "Queso", "7794567890123", 870.00));
+			almacen.addLstArticulo(new Articulo(5, "Huevos", "7795678901234", 250.00));
 
 			// Creo un Carrito con cliente1
 			Carrito carrito = new Carrito(1, fecha, LocalTime.of(12, 0), false, 5, cliente1);// faltan los articulos y
 																								// la entrega y los
 																								// descuentos
 			// Creo un Carrito2 con cliente2
-			Carrito carrito2 = new Carrito(2, fecha, LocalTime.of(13, 0), false, 5, cliente2);
+			Carrito carrito2 = new Carrito(2, fecha, LocalTime.of(13, 0), false, 5, cliente2);// idem
 
 			// agrego items a la lista de carrito
 			carrito.agregarItem(almacen.getLstArticulo().get(3), 3);
@@ -108,9 +101,10 @@ public class TestAlmacen {
 			carrito.setEntrega(entrega);
 			carrito2.setEntrega(entrega2);
 
-			// Calculo de descuentos si corresponde
-			// calcularDescuentoDia y calcularDescuentoEfectivo estan implementados en
-			// calcularDescuentoCarrito
+			/*
+			 * Calculo de descuentos si es que corresponde. calcularDescuentoDia y
+			 * calcularDescuentoEfectivo estan implementados en calcularDescuentoCarrito
+			 */
 			carrito.calcularDescuentoCarrito(carrito.getFecha().getDayOfWeek().getValue(),
 					almacen.getPorcentajeDescuentoDia(), almacen.getPorcentajeDescuentoEfectivo());
 
@@ -141,7 +135,7 @@ public class TestAlmacen {
 			System.out.println(almacen);
 			System.out.println("----------------------------------");
 			System.out.println(cliente2);
-			
+
 			System.out.println("----------------------------------");
 			System.out.println(almacen.getLstCarrito().get(1).getLstItemCarrito());
 			System.out.println("SubTotal Carrito = $" + almacen.getLstCarrito().get(1).calcularTotalCarrito());
