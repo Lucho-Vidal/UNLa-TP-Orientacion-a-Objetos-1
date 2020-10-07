@@ -37,8 +37,8 @@ public class Envio extends Entrega {
 		return costo;
 	}
 
-	public void setCosto(Ubicacion ubicacion, double costoFijo, double costoPorKm) {
-		double distancia = distanciaCoord(this.ubicacion.getLatitud(), this.ubicacion.getLongitud(),
+	public void setCosto(Ubicacion ubicacionComercio, double costoFijo, double costoPorKm) {
+		double distancia = distanciaCoord(ubicacionComercio.getLatitud(), ubicacionComercio.getLongitud(),
 				ubicacion.getLatitud(), ubicacion.getLongitud());
 		this.costo = costoFijo + (distancia * costoPorKm);
 	}

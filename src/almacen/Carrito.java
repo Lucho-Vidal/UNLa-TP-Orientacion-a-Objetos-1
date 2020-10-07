@@ -1,7 +1,12 @@
 package almacen;
 
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.ListIterator;
+
+
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -113,11 +118,15 @@ public class Carrito {
 	
 	// Trae un articulo de la lista itemCArrito
 	public ItemCarrito traerItemCarrito(Articulo articulo) {
+		boolean encontre = false;
+		ListIterator<ItemCarrito> item = lstItemCarrito.listIterator();
 		ItemCarrito itemAuxiliar = null;
-		
-		for(ItemCarrito i: this.lstItemCarrito) {
-			if(i.getArticulo() == articulo) {
-				itemAuxiliar = i;
+		while(item.hasNext()&&!encontre)
+		{
+			if(item.next().getArticulo().equals(articulo))
+			{
+				encontre=true;
+				itemAuxiliar=item.previous();
 			}
 		}
 		return itemAuxiliar;
