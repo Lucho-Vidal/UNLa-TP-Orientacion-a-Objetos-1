@@ -18,7 +18,6 @@ public class Comercio extends Actor {
 	private List<Articulo> lstArticulo;
 
 	// Constructor
-
 	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm,
 			int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo, List<DiaRetiro> lstDiaRetiro,
 			List<Carrito> lstCarrito, List<Articulo> lstArticulo) {
@@ -158,7 +157,7 @@ public class Comercio extends Actor {
 	public List<Turno> generarTurnosLibres(LocalDate fecha) throws Exception {// retorna una lista de objetos Turnos
 																				// libres
 		List<Turno> agenda = new ArrayList<Turno>();
-		int indiceLista = buscarIndiceDiaRetiro(fecha);
+		int indiceLista = buscarIndiceDiaRetiro(fecha);// si coincide con dia de retiro
 		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
 
 		while (hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
@@ -176,9 +175,9 @@ public class Comercio extends Actor {
 		LocalTime hora = lstDiaRetiro.get(indiceLista).getHoraDesde();
 
 		while (hora.isBefore(lstDiaRetiro.get(indiceLista).getHoraHasta())) {// mientras hora sea antes de horaHasta
-			if (buscarSiEstaOcupado(hora)) {// si el turno SI esta ocupado
+			if (buscarSiEstaOcupado(hora)) // si el turno SI esta ocupado
 				agenda.add(new Turno(fecha, hora, true));// creo un turno disponible y lo agrego a la agenda
-			}
+			
 			hora = hora.plusMinutes(lstDiaRetiro.get(indiceLista).getIntervalo());// sumamos el intervalo
 		}
 		return agenda;
@@ -205,13 +204,11 @@ public class Comercio extends Actor {
 		int idDiaRetiro = 1;
 
 		// Busco el ultimo Id
-		if (getLstDiaRetiro().size() != 0) { // si la lista esta vacia el Id va a ser = 1
+		if (getLstDiaRetiro().size() != 0) // si la lista esta vacia el Id va a ser = 1
 			idDiaRetiro = lstDiaRetiro.get(getLstDiaRetiro().size() - 1).getId() + 1; // el ultimo id + 1
-		}
 
 		DiaRetiro nuevoDiaRetiro = new DiaRetiro(idDiaRetiro, diaSemana, horaDesde, horaHasta, intervalo);// creo el
 																											// nuevo dia
-
 		// Busco si el dia Existe y tiro una Exception
 		for (int i = 0; i < lstDiaRetiro.size(); i++) {
 			if (nuevoDiaRetiro.equals(lstDiaRetiro.get(i)))

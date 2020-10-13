@@ -38,6 +38,11 @@ public class Turno {
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.dia == ((Turno)obj).getDia() && this.hora == ((Turno)obj).getHora();
+	}
 
 	@Override
 	public String toString() {
