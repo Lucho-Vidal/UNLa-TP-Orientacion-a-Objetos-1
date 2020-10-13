@@ -129,7 +129,6 @@ public class TestAlmacen {
 			System.out.println("Total con Descuentos = $" + almacen.getLstCarrito().get(0).totalAPagarCarrito());
 			System.out.println("Entrega = " + almacen.getLstCarrito().get(0).getEntrega());
 			System.out.println("----------------------------------");
-
 			System.out.println("\n");// saltos de linea
 			// Calculo los totales e imprimo carrito2
 			System.out.println(almacen);
@@ -153,9 +152,14 @@ public class TestAlmacen {
 			System.out.println("Turnos ocupados: " + almacen.traerTurnosOcupados(fecha));
 			System.out.println("\n");// saltos de linea
 			System.out.println("Turnos disponibles: " + almacen.generarTurnosLibres(fecha));
-
+			
+			// prueba traer articulo
+			System.out.println(carrito.traerItemCarrito(almacen.getLstArticulo().get(3)));
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 }
