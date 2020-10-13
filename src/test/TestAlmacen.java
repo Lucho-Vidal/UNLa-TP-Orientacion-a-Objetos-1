@@ -153,8 +153,7 @@ public class TestAlmacen {
 			System.out.println("\n");// saltos de linea
 			System.out.println("Turnos disponibles: " + almacen.generarTurnosLibres(fecha));
 			
-			// prueba traer articulo
-			System.out.println(carrito.traerItemCarrito(almacen.getLstArticulo().get(3)));
+			
 			
 			
 		} catch (Exception e) {
